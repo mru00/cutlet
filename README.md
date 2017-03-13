@@ -5,7 +5,7 @@ cutlet - Panel Cut Optimization
 cutlet is my approach on guillotine panel cut optimization, primarily concerned with cutting panels from stock sheets of wood.
 
 
-There are many commercial solutions available, but I found no promising [Open Source implementation](#open-source-implementations).
+There are many [commercial solutions](#commercial-products) available, but I found no promising [Open Source implementation](#open-source-implementations).
 
 This project is implemented in Java 1.8, using Maven. Gui is in JavsFX/FXML.
 
@@ -72,6 +72,12 @@ This project is in it's very early stages, so don't expect too much.
 - [ ] printing
  - labels, part list, 
 - [ ] search for more alternatives; populate related work
+- [ ] manual layouts 
+
+
+## dependencies 
+
+Today, only https://projectlombok.org for `@NonNull`.
 
 
 ## Related Work:
