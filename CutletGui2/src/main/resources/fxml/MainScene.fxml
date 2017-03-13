@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cutlet.cutletgui2.MainSceneController">
+
+    <children>
+        <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <MenuBar maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="324.0" VBox.vgrow="NEVER">
+                    <menus>
+                        <Menu text="%menu.file">  
+                            <items>  
+                                <MenuItem onAction="#open" text="%menu.file.open" />  
+                                <MenuItem disable="${controller.cantSaveFile}" onAction="#save" text="%menu.file.save" />  
+                                <MenuItem disable="${controller.noProjectLoaded}" onAction="#saveAs" text="%menu.file.save_as" />  
+                                <MenuItem disable="${controller.cantSaveFile}" onAction="#close" text="%menu.file.close" />  
+                                <SeparatorMenuItem />  
+                                <MenuItem onAction="#processExit" text="%menu.file.exit" />  
+                            </items>  
+                        </Menu>  
+                        <Menu text="%menu.optimize">
+                            <items>
+                                <MenuItem disable="${controller.noProjectLoaded}" onAction="#optimize" text="%menu.optimize.run_optimization" />
+                            </items>
+                        </Menu>
+                        <Menu text="%menu.examples">  
+                            <items>  
+                                <MenuItem onAction="#ex1" text="ex1" />  
+                                <MenuItem onAction="#ex2" text="ex2" />
+                        <MenuItem mnemonicParsing="false" onAction="#ex3" text="ex3" />  
+                            </items>  
+                        </Menu>  
+                        <Menu text="%menu.help">  
+                            <items>  
+                                <MenuItem disable="true" text="Search" />  
+                                <MenuItem text="Online Manual" visible="false" />  
+                                <SeparatorMenuItem />  
+                                <MenuItem text="About" />  
+                            </items>  
+                        </Menu>  
+                    </menus>
+                </MenuBar>
+                <ToolBar maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="600.0">
+                    <items>
+                        <Button disable="${controller.noProjectLoaded}" mnemonicParsing="false" onAction="#optimize" text="%menu.optimize.run_optimization" />
+                    </items>
+                </ToolBar>
+                <SplitPane dividerPositions="0.22240802675585283" prefHeight="220.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                    <items>
+                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                            <tabs>
+                                <Tab text="Untitled Tab 1">
+                                    <content>
+                                        <TableView prefHeight="200.0" prefWidth="200.0">
+                                            <columns>
+                                                <TableColumn prefWidth="75.0" text="%EDIT_TABLE_PANEL_ID" />
+                                                <TableColumn prefWidth="75.0" text="%EDIT_TABLE_PANEL_NAME" />
+                                            </columns>
+                                        </TableView>
+                                    </content>
+                                </Tab>
+                                <Tab text="Untitled Tab 2">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="200.0">
+                            <content>
+                                <FlowPane fx:id="flowPane" hgap="5.0" prefHeight="200.0" prefWidth="200.0" vgap="5.0" />
+                            </content>
+                        </ScrollPane>
+                    </items>
+                </SplitPane>
+            <HBox prefHeight="22.0" prefWidth="600.0" spacing="5.0">
+               <children>
+                  <ProgressBar prefWidth="200.0" progress="0.0" />
+                  <Label fx:id="statusBarLabel" text="Label" />
+               </children>
+            </HBox>
+            </children>
+           
+        </VBox>
+    </children>
+</AnchorPane>
