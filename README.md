@@ -80,7 +80,10 @@ This project is in it's very early stages, so don't expect too much.
 Today, only https://projectlombok.org for `@NonNull`.
 
 
-## Related Work:
+## Related Work
+
+https://github.com/Jack000/SVGnest
+
 
 ### Open source implementations
 * https://sourceforge.net/projects/ctmc/
