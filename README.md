@@ -7,8 +7,7 @@ cutlet is my approach on guillotine panel cut optimization, primarily concerned 
 
 There are many commercial solutions available, but I found no promising [Open Source implementation](#open-source-implementations).
 
-This project is implemented in Java 1.8, using Maven.
-
+This project is implemented in Java 1.8, using Maven. Gui is in JavsFX/FXML.
 
 ![image](https://cloud.githubusercontent.com/assets/581904/23873417/3dcddb1e-0832-11e7-8f96-502afaa06bf2.png)
 
@@ -24,25 +23,46 @@ The library implements the data structures and algorithms. Gui will become... we
 
 A goal was to implement a solid data structure to provide a good framework for research / surveys.
 
-## Implementation status:
+## Implementation status
 
 This project is in it's very early stages, so don't expect too much.
 
 * Algorithms work & results don't look too bad
-* GUI is just started
- * mostly "hello world" code, layout rendering "ok"
 * Benchmark does something, useful to compare the algorithms
 
+### Lib 
 
-## Implemented optimization algorithms:
+- [x] Basic Data structure
+- [x] Basic algorithms 
+- [ ] Rotation & grain
+- [ ] material database
+- [ ] stock database 
+
+
+### Gui
+
+
+- [x] save & load (via java serialization)
+- [x] visalize layout
+- [x] run optimization in worker 
+- [x] i18n
+- [ ] panning & zooming
+- [ ] parts editor / table
+- [ ] settings/configuration 
+
+
+## Implemented optimization algorithms
+
 * Simmulated Annealing
 * A naiive single pass algorithm
 * A less naiive single pass algorithm
 
 
-## TODO:
+## TODO
 
-- [ ] find collaborators
+
+- [ ] test suite
+- [ ] attract collaborators
 - [ ] implement panel editor in GUI
 - [ ] collect "must have" features & implement them
 - [ ] add more algorithms
