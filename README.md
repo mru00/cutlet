@@ -95,3 +95,6 @@ https://github.com/Jack000/SVGnest
 * http://www.optimalon.com/online_cut_optimizer.htm
 * http://www.panel.com.hr/EngHome.aspx
 * http://alternativeto.net/software/gncutter/
+
+
+
