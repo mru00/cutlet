@@ -40,6 +40,7 @@ This project is in it's very early stages, so don't expect too much.
 - [ ] collect "must have" features & implement them
 - [ ] add more algorithms
 - [ ] interface to saw
+- [ ] search for more alternatives; populate related work
 
 
 ## Related Work:
