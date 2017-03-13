@@ -25,12 +25,14 @@ This project is in it's very early stages, so don't expect too much.
 
 * Algorithms work & results don't look too bad
 * GUI is just started
+ * mostly "hello world" code, layout rendering "ok"
 * Benchmark does something, useful to compare the algorithms
 
 
 ## Implemented optimization algorithms:
 * Simmulated Annealing
-* some cheap heuristic
+* A naiive single pass algorithm
+* A less naiive single pass algorithm
 
 
 ## TODO:
@@ -47,6 +49,7 @@ This project is in it's very early stages, so don't expect too much.
 
 ### Open source implementations:
 * https://sourceforge.net/projects/ctmc/
+* https://github.com/denisenkom/raskroy
 
 ### Commercial Products:
 * http://www.maxcutsoftware.com/
