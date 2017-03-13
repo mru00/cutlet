@@ -2,7 +2,12 @@
 
 cutlet - Panel Cut Optimization
 
-cutlet is my approach on guillotine panel cut optimization. There are many commercial solutions available, but I found no promising Open Source implementation.
+cutlet is my approach on guillotine panel cut optimization, primarily concerned with cutting panels from stock sheets of wood.
+
+
+There are many commercial solutions available, but I found no promising [Open Source implementation](#open-source-implementations).
+
+This project is implemented in Java 1.8, using Maven.
 
 
 ![image](https://cloud.githubusercontent.com/assets/581904/23873417/3dcddb1e-0832-11e7-8f96-502afaa06bf2.png)
@@ -41,17 +46,22 @@ This project is in it's very early stages, so don't expect too much.
 - [ ] implement panel editor in GUI
 - [ ] collect "must have" features & implement them
 - [ ] add more algorithms
+- [ ] find better cost/fitness functions 
 - [ ] interface to saw
+- [ ] cost calculation
+- [ ] printing
+ - labels, part list, 
 - [ ] search for more alternatives; populate related work
 
 
 ## Related Work:
 
-### Open source implementations:
+### Open source implementations
 * https://sourceforge.net/projects/ctmc/
-* https://github.com/denisenkom/raskroy
+* https://github.com/denisenkom/raskroy  
 
-### Commercial Products:
+
+### Commercial Products
 * http://www.maxcutsoftware.com/
 * http://www.optimalon.com/online_cut_optimizer.htm
 * http://www.panel.com.hr/EngHome.aspx
