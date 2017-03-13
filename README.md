@@ -4,6 +4,9 @@ cutlet - Panel Cut Optimization
 
 cutlet is my approach on guillotine panel cut optimization. There are many commercial solutions available, but I found no promising Open Source implementation.
 
+
+![image](https://cloud.githubusercontent.com/assets/581904/23873417/3dcddb1e-0832-11e7-8f96-502afaa06bf2.png)
+
 ## Overview
 
 
