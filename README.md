@@ -77,6 +77,7 @@ This project is in it's very early stages, so don't expect too much.
  - labels, part list, 
 - [ ] search for more alternatives; populate related work
 - [ ] manual layouts 
+- [x] saw blade thickness / saw kerf
 
 
 ## dependencies 
@@ -97,7 +98,6 @@ Project | Looks active? | Lang | Comment
 [COPanno](https://sourceforge.net/projects/copanno) | yes | Java | french source code?
 [raskroy](https://github.com/denisenkom/raskroy) [SF](https://sourceforge.net/projects/cutoptima) | no | C++ / C# | english c#, some russian
 [Cut Micro](https://sourceforge.net/projects/ctmc) | yes | C# |
-[Optimierung](https://sourceforge.net/projects/optimierung) | | Delphi |
 [Cutting Problem](https://sourceforge.net/projects/cuttingproblem) | | Java |
 
 
@@ -107,6 +107,9 @@ Project | Looks active? | Lang | Comment
 * http://www.optimalon.com/online_cut_optimizer.htm
 * http://www.panel.com.hr/EngHome.aspx
 * http://alternativeto.net/software/gncutter/
+
+Project | Looks active? | Lang | Comment
+[Optimierung](https://sourceforge.net/projects/optimierung) | | Delphi | 1D optimization, 
 
 
 
