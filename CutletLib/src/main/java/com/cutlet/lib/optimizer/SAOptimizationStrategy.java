@@ -32,16 +32,16 @@ public class SAOptimizationStrategy extends AbstractOptimizationStrategy {
         // Uncomment the desired problem below:
         OptState state = new OptState(project, fitness);
         //State state = new BinPackingProblem();
-        
+
         state.perm = new int[project.getPanels().size()];
-        for (int i = 0; i < project.getPanels().size(); i ++) {
+        for (int i = 0; i < project.getPanels().size(); i++) {
             state.perm[i] = i;
         }
         state.prevPerm = state.perm;
 
         // Uncomment the desired stochastic local search below:
         //OptState minState = (OptState) new HillDescender(state).search(ITERATIONS);
-        OptState minState = (OptState) new SimulatedAnnealer(state, 1, .99999).search(ITERATIONS); 
+        OptState minState = (OptState) new SimulatedAnnealer(state, 1, .99999).search(ITERATIONS);
 
         return minState.result;
     }
@@ -50,12 +50,9 @@ public class SAOptimizationStrategy extends AbstractOptimizationStrategy {
 
         OptimizationResult optimizationResult = new OptimizationResult();
 
-//        optimizationResult.createNewLayout(p);
         for (Panel p : panels) {
             FreeNode candidate = findSheet(optimizationResult, p);
             if (candidate == null) {
-                log.info("failed to find free space on sheet, creating a new layout");
-
                 optimizationResult.createNewLayout(p);
                 candidate = findSheet(optimizationResult, p);
             }
