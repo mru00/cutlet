@@ -7,8 +7,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>CutletBenchmark</module>
-        <module>CutletGui2</module>
         <module>CutletLib</module>
+        <module>CutletGui</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

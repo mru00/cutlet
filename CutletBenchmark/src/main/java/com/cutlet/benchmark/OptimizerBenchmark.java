@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.cutlet.cutletbenchmark2;
+package com.cutlet.benchmark;
 
 import com.cutlet.lib.testing.RandomData;
 import com.cutlet.lib.testing.Data1;
@@ -67,7 +67,7 @@ public class OptimizerBenchmark {
                 new DataNoPanels()
         );
 
-        List<String> optimizers = Arrays.asList("Smart", "Naiive", "SA", "Perm");
+        List<String> optimizers = Arrays.asList("Smart", "Naiive", "SA");
 
         final PrintStream output = System.err;
 
