@@ -14,4 +14,5 @@ import lombok.ToString;
  */
 @ToString
 public class Wood implements Material, Serializable {
+    
 }
