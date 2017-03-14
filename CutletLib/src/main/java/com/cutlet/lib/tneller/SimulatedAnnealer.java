@@ -51,9 +51,9 @@ public class SimulatedAnnealer {
     {
 	double temperature = initTemp; // ***
 	for (int i = 0; i < iterations; i++) {
-            if (i % 100000 == 0) 
-                System.out.println(minEnergy 
-                              + "\t" + energy);
+//            if (i % 100000 == 0) 
+//                System.out.println(minEnergy 
+//                              + "\t" + energy);
             state.step();
             double nextEnergy = state.energy();
 	    if (nextEnergy <= energy 

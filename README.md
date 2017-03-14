@@ -69,6 +69,9 @@ This project is in it's very early stages, so don't expect too much.
 
 - [x] basically works
 
+It is executed as a unit test in "mvn test", also in travis.
+You can have a look at [![Build Status](https://travis-ci.org/mru00/cutlet.svg?branch=master)](https://travis-ci.org/mru00/cutlet) to see it's output.
+
 ## Implemented optimization algorithms
 
 * Simmulated Annealing (based on http://cs.gettysburg.edu/~tneller/resources/sls/index.html)
@@ -92,7 +95,8 @@ This project is in it's very early stages, so don't expect too much.
 - [ ] search for more alternatives; populate related work
 - [ ] manual layouts 
 - [x] saw blade thickness / saw kerf
-
+- [ ] find deluxe simulated annealing framework
+- [ ] find deluxe genetic algorithm framework
 
 ## dependencies 
 
