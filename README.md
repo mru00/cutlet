@@ -5,7 +5,7 @@ cutlet - Panel Cut Optimization [![Build Status](https://travis-ci.org/mru00/cut
 cutlet is my approach on guillotine panel cut optimization, primarily concerned with cutting panels from stock sheets of wood.
 
 
-There are many [commercial solutions](#commercial-products) available, but I found no promising [Open Source implementation](#open-source-implementations).
+There are many [commercial solutions](#commercial-products) available, and quite some [Open Source implementations](#open-source-implementations).
 
 This project is implemented in Java 1.8, using Maven. Gui is in JavaFX/FXML.
 
@@ -88,6 +88,10 @@ https://github.com/Jack000/SVGnest
 ### Open source implementations
 * https://sourceforge.net/projects/ctmc/
 * https://github.com/denisenkom/raskroy  
+* https://sourceforge.net/projects/copanno/
+* https://sourceforge.net/projects/cutoptima
+* https://sourceforge.net/projects/optimierung
+* https://sourceforge.net/projects/cuttingproblem
 
 
 ### Commercial Products
