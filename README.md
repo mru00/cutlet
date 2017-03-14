@@ -86,12 +86,16 @@ https://github.com/Jack000/SVGnest
 
 
 ### Open source implementations
-* https://sourceforge.net/projects/ctmc/
-* https://github.com/denisenkom/raskroy  
-* https://sourceforge.net/projects/copanno/
-* https://sourceforge.net/projects/cutoptima
-* https://sourceforge.net/projects/optimierung
-* https://sourceforge.net/projects/cuttingproblem
+
+
+Project | Looks active? | Lang | Comment
+------------ | ------------- | ------------- | -------------
+[COPanno](https://sourceforge.net/projects/copanno) | yes | Java | french source code?
+[raskroy](https://github.com/denisenkom/raskroy) [SF](https://sourceforge.net/projects/cutoptima) | no | C++ / C# | english c#, some russian
+[Cut Micro](https://sourceforge.net/projects/ctmc) | yes | C# |
+[Optimierung](https://sourceforge.net/projects/optimierung) | | Delphi |
+[Cutting Problem](https://sourceforge.net/projects/cuttingproblem) | | Java |
+
 
 
 ### Commercial Products
