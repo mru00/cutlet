@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2017 rudolf.muehlbauer@intel.com
  */
+
 
 package com.cutlet.benchmark;
 
@@ -22,6 +21,7 @@ import com.cutlet.lib.optimizer.OptimizationStrategy;
 import com.cutlet.lib.optimizer.Optimizer;
 import com.cutlet.lib.optimizer.PermutationOptimizationStrategy;
 import com.cutlet.lib.optimizer.SAOptimizationStrategy;
+import com.cutlet.lib.optimizer.SAOptimizationStrategy2;
 import com.cutlet.lib.optimizer.SimpleFitnessFunction;
 import com.cutlet.lib.testing.DataNoPanels;
 import com.cutlet.lib.testing.DataTable;
@@ -67,7 +67,7 @@ public class OptimizerBenchmark {
                 new DataNoPanels()
         );
 
-        List<String> optimizers = Arrays.asList("Smart", "Naiive", "SA");
+        List<String> optimizers = Arrays.asList("Smart", "Naiive", "SA", "SA2" /*, "Perm"*/);
 
         final PrintStream output = System.err;
 
@@ -150,6 +150,8 @@ public class OptimizerBenchmark {
                 return new PermutationOptimizationStrategy();
             case "SA":
                 return new SAOptimizationStrategy();
+            case "SA2":
+                return new SAOptimizationStrategy2();
         }
         throw new RuntimeException("optimizer class for " + which + " not found");
     }
