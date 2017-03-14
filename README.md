@@ -7,7 +7,7 @@ cutlet is my approach on guillotine panel cut optimization, primarily concerned 
 
 There are many [commercial solutions](#commercial-products) available, but I found no promising [Open Source implementation](#open-source-implementations).
 
-This project is implemented in Java 1.8, using Maven. Gui is in JavsFX/FXML.
+This project is implemented in Java 1.8, using Maven. Gui is in JavaFX/FXML.
 
 ![image](https://cloud.githubusercontent.com/assets/581904/23873417/3dcddb1e-0832-11e7-8f96-502afaa06bf2.png)
 
