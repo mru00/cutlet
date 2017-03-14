@@ -2,6 +2,10 @@
 
 cutlet - Panel Cut Optimization [![Build Status](https://travis-ci.org/mru00/cutlet.svg?branch=master)](https://travis-ci.org/mru00/cutlet)
 
+
+** not production ready **
+
+
 cutlet is my approach on guillotine panel cut optimization, primarily concerned with cutting panels from stock sheets of wood.
 
 
