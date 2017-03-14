@@ -71,7 +71,7 @@ This project is in it's very early stages, so don't expect too much.
 
 ## Implemented optimization algorithms
 
-* Simmulated Annealing
+* Simmulated Annealing (based on http://cs.gettysburg.edu/~tneller/resources/sls/index.html)
 * A naiive single pass algorithm
 * A less naiive single pass algorithm
 
@@ -79,10 +79,10 @@ This project is in it's very early stages, so don't expect too much.
 ## TODO
 
 
-- [ ] test suite
 - [ ] attract collaborators
-- [ ] implement panel editor in GUI
 - [ ] collect "must have" features & implement them
+- [ ] test suite
+- [ ] implement panel editor in GUI
 - [ ] add more algorithms
 - [ ] find better cost/fitness functions 
 - [ ] interface to saw
@@ -102,6 +102,8 @@ Today, only https://projectlombok.org for `@NonNull`. Will go away eventually.
 ## Related Work
 
 https://github.com/Jack000/SVGnest
+
+Simulated Annealing taken from http://cs.gettysburg.edu/~tneller/resources/sls/index.html
 
 
 ### Open source implementations
