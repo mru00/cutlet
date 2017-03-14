@@ -27,33 +27,47 @@ The library implements the data structures and algorithms. Gui will become... we
 
 A goal was to implement a solid data structure to provide a good framework for research / surveys.
 
+## Goals
+
+- [x] Platform agnostic
+- [x] easy "getting started" and deployment
+ - Java 1.8, Maven, JavaFX
+- [x] built around reusable core library
+- [x] build solid data structure
+- [x] optimization algorithm agnostic / easy to add new algorithms
+- [x] open source
+- [x] enable meaningful evaluation of optimization algorithms
+
 ## Implementation status
 
 This project is in it's very early stages, so don't expect too much.
 
-* Algorithms work & results don't look too bad
-* Benchmark does something, useful to compare the algorithms
-
 ### Lib 
 
 - [x] Basic Data structure
-- [x] Basic algorithms 
+- [x] Basic algorithms
+- [x] calculate statistics for a generated layout
 - [ ] Rotation & grain
 - [ ] material database
 - [ ] stock database 
+- [x] saw kerf / blade thickness
 
 
 ### Gui
 
 
-- [x] save & load (via java serialization)
 - [x] visalize layout
 - [x] run optimization in worker 
-- [x] i18n
+- [x] i18n prepared
+- [x] save & load (via java serialization)
+- [x] layout in FXML / SceneBuilder
 - [ ] panning & zooming
 - [ ] parts editor / table
 - [ ] settings/configuration 
 
+### Benchmark
+
+- [x] basically works
 
 ## Implemented optimization algorithms
 
@@ -82,7 +96,7 @@ This project is in it's very early stages, so don't expect too much.
 
 ## dependencies 
 
-Today, only https://projectlombok.org for `@NonNull`.
+Today, only https://projectlombok.org for `@NonNull`. Will go away eventually.
 
 
 ## Related Work
@@ -109,7 +123,8 @@ Project | Looks active? | Lang | Comment
 * http://alternativeto.net/software/gncutter/
 
 Project | Looks active? | Lang | Comment
-[Optimierung](https://sourceforge.net/projects/optimierung) | | Delphi | 1D optimization, 
+------------ | ------------- | ------------- | -------------
+[Optimierung](https://sourceforge.net/projects/optimierung) | | Delphi | 1D optimization
 
 
 
