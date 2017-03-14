@@ -100,10 +100,6 @@ You can have a look at [![Build Status](https://travis-ci.org/mru00/cutlet.svg?b
 - [x] find deluxe simulated annealing framework
 - [x] find deluxe genetic algorithm framework
 
-## dependencies 
-
-Today, only https://projectlombok.org for `@NonNull`. Will go away eventually.
-
 
 ## Related Work
 
