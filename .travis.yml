@@ -7,5 +7,5 @@ addons:
     packages:
       - oracle-java8-installer
       
-script: ./travis_build.sh
+script: pwd && ls && ./travis_build.sh
 
