@@ -2,7 +2,6 @@ language: java
 jdk:
   - oraclejdk8
 sudo: false
-before_install: cd CutletLib
 addons:
   apt:
     packages:
