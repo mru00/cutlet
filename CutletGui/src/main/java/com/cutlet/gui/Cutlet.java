@@ -1,7 +1,6 @@
 /*
  * Copyright (C) 2017 rudolf.muehlbauer@intel.com
  */
-
 package com.cutlet.gui;
 
 import javafx.application.Application;
@@ -27,7 +26,7 @@ public class Cutlet extends Application {
 
         try {
 
-            final FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainScene.fxml"), ResourceBundle.getBundle("Bundle"));
+            final FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainScene.fxml"), getBundle());
             final Parent root = loader.load();
 
             MainSceneController controller = (MainSceneController) loader.getController();
@@ -54,7 +53,7 @@ public class Cutlet extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        setDebugLevel(Level.OFF);
+        //setDebugLevel(Level.OFF);
 
         launch(args);
     }
@@ -71,7 +70,7 @@ public class Cutlet extends Application {
     }
 
     private static String i18n(String str) {
-        final ResourceBundle bundle = ResourceBundle.getBundle("Bundle");
+        final ResourceBundle bundle = getBundle();
 
         try {
             return bundle.getString(str);
@@ -79,4 +78,9 @@ public class Cutlet extends Application {
             return "i18n(" + str + ")";
         }
     }
+
+    private static ResourceBundle getBundle() {
+        return ResourceBundle.getBundle("Bundle");
+    }
+
 }

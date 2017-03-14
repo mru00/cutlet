@@ -1,13 +1,12 @@
 /*
  * Copyright (C) 2017 rudolf.muehlbauer@intel.com
  */
-
 package com.cutlet.gui;
 
 import com.cutlet.lib.model.Project;
+import com.cutlet.lib.optimizer.GAOptimizationStrategy;
 import com.cutlet.lib.optimizer.OptimizationResult;
 import com.cutlet.lib.optimizer.Optimizer;
-import com.cutlet.lib.optimizer.SAOptimizationStrategy;
 import com.cutlet.lib.testing.DataRegal;
 import com.cutlet.lib.testing.DataTable;
 import com.cutlet.lib.testing.RandomData;
@@ -197,7 +196,7 @@ public class MainSceneController implements Initializable {
                 updateMessage("running optimization");
 
                 final Optimizer optimizer = new Optimizer();
-                final OptimizationResult result = optimizer.optimize(project, new SAOptimizationStrategy());
+                final OptimizationResult result = optimizer.optimize(project, new GAOptimizationStrategy());
 
                 Platform.runLater(() -> {
                     renderLayout(result);

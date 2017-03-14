@@ -1,7 +1,6 @@
 /*
  * Copyright (C) 2017 rudolf.muehlbauer@intel.com
  */
-
 package com.cutlet.gui;
 
 import com.cutlet.lib.model.Dimension;
@@ -15,6 +14,7 @@ import com.cutlet.lib.optimizer.OptimizationResult;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import lombok.NonNull;
 
@@ -29,7 +29,11 @@ public class CutLayoutDrawer {
         for (Layout layout : result.getLayouts()) {
             Dimension dim = scale(layout.getSheet().getDimension());
             Canvas canvas = new Canvas(dim.getLength(), dim.getWidth());
-            pane.getChildren().add(canvas);
+
+            StackPane canvasContainer = new StackPane(canvas);
+            canvasContainer.getStyleClass().add("layoutcanvas");
+
+            pane.getChildren().add(canvasContainer);
             drawOptimizationResult(canvas, layout);
             //canvas.setScaleX(0.5);
             //canvas.setScaleY(0.5);

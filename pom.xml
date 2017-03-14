@@ -10,7 +10,47 @@
         <module>CutletLib</module>
         <module>CutletGui</module>
     </modules>
+    <url>https://github.com/mru00/cutlet</url>
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/mru00/cutlet/issues</url>
+    </issueManagement>
+    <inceptionYear>2017</inceptionYear>
+    <scm>
+        <connection>scm:git:https://github.com/mru00/cutlet.git</connection>
+        <developerConnection>scm:git:git@github.com:mru00/cutlet.git</developerConnection>
+        <url>https://github.com/mru00/cutlet</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>mru00</id>
+            <name>Rudolf Muehlbauer</name>
+            <email>rudolf.muehlbauer@gmail.com</email>
+        </developer>
+    </developers>
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/mru00/cutlet</url>
+    </ciManagement>
+  
+  
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    <name>Cutlet - Panel cut optimization</name>
+    <description>Guillotine style panel cut optimization</description>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
