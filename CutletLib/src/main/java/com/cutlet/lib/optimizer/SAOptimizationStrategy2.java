@@ -23,14 +23,16 @@ import xyz.thepathfinder.simulatedannealing.Solver;
  */
 public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
 
-    private final Logger log = Logger.getLogger(SAOptimizationStrategy2.class.getName());
+    private static final Logger log = Logger.getLogger(SAOptimizationStrategy2.class.getName());
     public static java.util.Random random = new java.util.Random();
 
     @Override
     public OptimizationResult optimize(Project project, FitnessFunction fitness) {
         try {
-            double INITIAL_TEMPERATURE = 10;
+            // higher numbers will break travis CI unit tests...
             int NUMBER_OF_STEPS = 10000;
+            double INITIAL_TEMPERATURE = 10;
+
             Scheduler scheduler = new LinearDecayScheduler(INITIAL_TEMPERATURE, NUMBER_OF_STEPS);
             Problem<OptState> problem = new OptProblem(project, new SimpleFitnessFunction());
             Solver<OptState> solver = new Solver(problem, scheduler);
@@ -38,7 +40,7 @@ public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
 
             return solution.result;
         } catch (InfeasibleProblemException ex) {
-            Logger.getLogger(SAOptimizationStrategy2.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
         return null;
     }

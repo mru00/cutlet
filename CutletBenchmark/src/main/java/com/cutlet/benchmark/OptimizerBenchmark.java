@@ -11,6 +11,7 @@ import com.cutlet.lib.testing.TestData;
 import com.cutlet.lib.testing.DataRegal;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.model.Layout;
+import com.cutlet.lib.optimizer.GAOptimizationStrategy;
 import com.cutlet.lib.optimizer.NaiiveOptimizationStrategy;
 import com.cutlet.lib.optimizer.OptimizationResult;
 import com.cutlet.lib.optimizer.OptimizationResultStats;
@@ -67,7 +68,7 @@ public class OptimizerBenchmark {
                 new DataNoPanels()
         );
 
-        List<String> optimizers = Arrays.asList("Smart", "Naiive", "SA", "SA2" /*, "Perm"*/);
+        List<String> optimizers = Arrays.asList("Smart", "Naiive", "SA", "SA2", "GA" /*, "Perm"*/);
 
         final PrintStream output = System.err;
 
@@ -152,6 +153,8 @@ public class OptimizerBenchmark {
                 return new SAOptimizationStrategy();
             case "SA2":
                 return new SAOptimizationStrategy2();
+            case "GA":
+                return new GAOptimizationStrategy();
         }
         throw new RuntimeException("optimizer class for " + which + " not found");
     }

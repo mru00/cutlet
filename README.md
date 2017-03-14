@@ -75,6 +75,8 @@ You can have a look at [![Build Status](https://travis-ci.org/mru00/cutlet.svg?b
 ## Implemented optimization algorithms
 
 * Simmulated Annealing (based on http://cs.gettysburg.edu/~tneller/resources/sls/index.html)
+* another SA implementation
+* a Genetic Algorithm implementation
 * A naiive single pass algorithm
 * A less naiive single pass algorithm
 
@@ -95,8 +97,8 @@ You can have a look at [![Build Status](https://travis-ci.org/mru00/cutlet.svg?b
 - [ ] search for more alternatives; populate related work
 - [ ] manual layouts 
 - [x] saw blade thickness / saw kerf
-- [ ] find deluxe simulated annealing framework
-- [ ] find deluxe genetic algorithm framework
+- [x] find deluxe simulated annealing framework
+- [x] find deluxe genetic algorithm framework
 
 ## dependencies 
 
