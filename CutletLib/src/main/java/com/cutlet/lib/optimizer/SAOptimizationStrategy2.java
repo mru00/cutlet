@@ -30,7 +30,7 @@ public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
     public OptimizationResult optimize(Project project, FitnessFunction fitness) {
         try {
             double INITIAL_TEMPERATURE = 10;
-            int NUMBER_OF_STEPS = 100000;
+            int NUMBER_OF_STEPS = 10000;
             Scheduler scheduler = new LinearDecayScheduler(INITIAL_TEMPERATURE, NUMBER_OF_STEPS);
             Problem<OptState> problem = new OptProblem(project, new SimpleFitnessFunction());
             Solver<OptState> solver = new Solver(problem, scheduler);
