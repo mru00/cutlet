@@ -1,7 +1,6 @@
 /*
  * Copyright (C) 2017 rudolf.muehlbauer@intel.com
  */
-
 package com.cutlet.lib.optimizer;
 
 import com.cutlet.lib.model.Layout;
@@ -13,6 +12,7 @@ import com.cutlet.lib.data.cuttree.CutTreeNode;
 import com.cutlet.lib.data.cuttree.FreeNode;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.NonNull;
 
 /**
  *
@@ -20,17 +20,19 @@ import java.util.List;
  */
 public abstract class AbstractOptimizationStrategy implements OptimizationStrategy {
 
-    protected FreeNode findSheet(final OptimizationResult result, final Panel p) {
+    protected FreeNode findSheet(@NonNull final OptimizationResult result,
+            @NonNull final Panel p) {
+
         return getFreeNodes(result).stream()
                 .filter(a -> a.canHold(p))
                 .findFirst()
                 .orElse(null);
     }
 
-    protected List<FreeNode> getFreeNodes(final OptimizationResult result) {
+    protected List<FreeNode> getFreeNodes(@NonNull final OptimizationResult result) {
         final List<FreeNode> free = new ArrayList<>();
         for (Layout layout : result.getLayouts()) {
-            for (CutTreeNode n: layout.getCutTree()) {
+            for (CutTreeNode n : layout.getCutTree()) {
                 if (n instanceof FreeNode) {
                     free.add((FreeNode) n);
                 }
@@ -39,7 +41,9 @@ public abstract class AbstractOptimizationStrategy implements OptimizationStrate
         return free;
     }
 
-    protected FreeNode cutToFit(FreeNode candidate, final Project project, final Panel p) {
+    protected FreeNode cutToFit(@NonNull FreeNode candidate,
+            @NonNull final Project project,
+            @NonNull final Panel p) {
 
         final Dimension panelDimension = p.getDimension();
         if (candidate.getDimension().getLength() != panelDimension.getLength()) {
@@ -56,8 +60,8 @@ public abstract class AbstractOptimizationStrategy implements OptimizationStrate
         }
         return candidate;
     }
-    
-    protected boolean almostSameSize(double a, double b) {
+
+    protected boolean almostSameSize(final double a, final double b) {
         final double epsilon = 0.1;
         return Math.abs(a - b) < epsilon;
     }

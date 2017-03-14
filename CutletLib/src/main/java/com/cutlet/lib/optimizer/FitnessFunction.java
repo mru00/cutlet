@@ -4,11 +4,13 @@
 
 package com.cutlet.lib.optimizer;
 
+import lombok.NonNull;
+
 /**
  *
  * @author rmuehlba
  */
 @FunctionalInterface
 public interface FitnessFunction {
-    public double fitness(OptimizationResultStats result);
+    public double fitness(@NonNull final OptimizationResultStats result);
 }

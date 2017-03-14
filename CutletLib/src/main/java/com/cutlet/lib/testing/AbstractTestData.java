@@ -10,14 +10,15 @@ import com.cutlet.lib.model.Project;
 import com.cutlet.lib.model.StockSheet;
 import com.cutlet.lib.material.Wood;
 import java.util.List;
+import lombok.NonNull;
 
 /**
  *
  * @author rmuehlba
  */
-public abstract class AbstractTestkData implements TestData {
+public abstract class AbstractTestData implements TestData {
 
-    public Project makeProject(List<Panel> inputs, final int bladeWidth) {
+    public Project makeProject(@NonNull List<Panel> inputs, final int bladeWidth) {
         Project project = new Project();
         project.setPanels(inputs);
         project.setBladeWidth(bladeWidth);

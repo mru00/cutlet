@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author rmuehlba
  */
-public class DataNoPanels extends AbstractTestkData {
+public class DataNoPanels extends AbstractTestData {
 
     @Override
     public Project getData() {

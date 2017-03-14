@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import lombok.NonNull;
 import xyz.thepathfinder.simulatedannealing.InfeasibleProblemException;
 import xyz.thepathfinder.simulatedannealing.LinearDecayScheduler;
 import xyz.thepathfinder.simulatedannealing.Problem;
@@ -27,7 +28,7 @@ public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
     public static java.util.Random random = new java.util.Random();
 
     @Override
-    public OptimizationResult optimize(Project project, FitnessFunction fitness) {
+    public OptimizationResult optimize(@NonNull Project project, @NonNull FitnessFunction fitness) {
         try {
             // higher numbers will break travis CI unit tests...
             int NUMBER_OF_STEPS = 10000;
@@ -45,7 +46,7 @@ public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
         return null;
     }
 
-    public OptimizationResult optimizeAux(Project project, List<Panel> panels) {
+    public OptimizationResult optimizeAux(@NonNull Project project, @NonNull List<Panel> panels) {
 
         OptimizationResult optimizationResult = new OptimizationResult();
 
@@ -68,13 +69,13 @@ public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
         Project project;
         FitnessFunction fitness;
 
-        public OptProblem(Project project, FitnessFunction fitness) {
+        public OptProblem(@NonNull Project project, @NonNull FitnessFunction fitness) {
             this.project = project;
             this.fitness = fitness;
         }
 
         @Override
-        public double energy(OptState t) {
+        public double energy(@NonNull OptState t) {
             t.result = optimizeAux(project, t.panels);
             return fitness.fitness(t.result.getStats());
         }

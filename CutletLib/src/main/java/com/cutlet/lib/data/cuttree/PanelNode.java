@@ -1,12 +1,12 @@
 /*
  * Copyright (C) 2017 rudolf.muehlbauer@intel.com
  */
-
 package com.cutlet.lib.data.cuttree;
 
 import com.cutlet.lib.model.Dimension;
 import com.cutlet.lib.model.Panel;
 import com.cutlet.lib.model.Position;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -18,7 +18,11 @@ public class PanelNode extends AbstractCutTreeNode {
 
     private final Panel panel;
 
-    public PanelNode(CutTreeNode parent, Panel panel, Position position, Dimension dimension) {
+    public PanelNode(@NonNull final CutTreeNode parent,
+            @NonNull final Panel panel,
+            @NonNull final Position position,
+            @NonNull final Dimension dimension) {
+
         super(parent, position, dimension);
         this.panel = panel;
     }
@@ -28,7 +32,7 @@ public class PanelNode extends AbstractCutTreeNode {
     }
 
     @Override
-    public void replaceChild(CutTreeNode from, CutTreeNode to) {
+    public void replaceChild(@NonNull final CutTreeNode from, @NonNull final CutTreeNode to) {
         throw new UnsupportedOperationException("Not supported: Freepanel.replace.");
     }
 }

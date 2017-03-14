@@ -10,6 +10,7 @@ import com.cutlet.lib.data.cuttree.FreeNode;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import lombok.NonNull;
 
 /**
  *
@@ -20,7 +21,7 @@ public class NaiiveOptimizationStrategy extends AbstractOptimizationStrategy {
     private final Logger log = Logger.getLogger("NaiiveOptimzer");
 
     @Override
-    public OptimizationResult optimize(Project project, FitnessFunction fitness) {
+    public OptimizationResult optimize(@NonNull Project project, @NonNull FitnessFunction fitness) {
 
         OptimizationResult optimizationResult = new OptimizationResult();
 

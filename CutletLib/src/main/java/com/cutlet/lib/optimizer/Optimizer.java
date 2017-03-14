@@ -6,6 +6,7 @@ package com.cutlet.lib.optimizer;
 
 import com.cutlet.lib.model.Project;
 import java.util.logging.Logger;
+import lombok.NonNull;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Optimizer {
 
     private Logger log = Logger.getLogger("Optimizer");
 
-    public OptimizationResult optimize(Project project, OptimizationStrategy strategy) {
+    public OptimizationResult optimize(@NonNull Project project, @NonNull OptimizationStrategy strategy) {
 
         if (project.getPanels().isEmpty()) {
             log.info("Project doesn't have any panels configured; nothing to optimize");

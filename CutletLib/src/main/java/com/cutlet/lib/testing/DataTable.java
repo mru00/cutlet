@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author rmuehlba
  */
-public class DataTable extends AbstractTestkData {
+public class DataTable extends AbstractTestData {
 
     @Override
     public Project getData() {
@@ -46,31 +46,32 @@ Input Panel	rueckteil	636 mm	136 mm	1	18.0mm	SameAsSheet	buche leimholz					Fals
 Input Panel	liegeflaeche	750 mm	600 mm	1	18.0mm	SameAsSheet	buche leimholz					False							20	20													
 
          */
+        final boolean canRotate = true;
         List<Panel> inputs = new ArrayList<>();
         for (i = 0; i < 4; i++) {
-            inputs.add(new Panel(sheet, new Dimension(900, 60), "bein"));
+            inputs.add(new Panel(sheet, new Dimension(900, 60), "bein", canRotate));
         }
         for (i = 0; i < 2; i++) {
-            inputs.add(new Panel(sheet, new Dimension(732, 564), "einlegebrett"));
+            inputs.add(new Panel(sheet, new Dimension(732, 564), "einlegebrett", canRotate));
         }
         for (i = 0; i < 4; i++) {
-            inputs.add(new Panel(sheet, new Dimension(630, 60), "seitenstrebe"));
+            inputs.add(new Panel(sheet, new Dimension(630, 60), "seitenstrebe", canRotate));
         }
         for (i = 0; i < 2; i++) {
-            inputs.add(new Panel(sheet, new Dimension(564, 60), "stuetze hinten"));
+            inputs.add(new Panel(sheet, new Dimension(564, 60), "stuetze hinten", canRotate));
         }
 
         for (i = 0; i < 2; i++) {
-            inputs.add(new Panel(sheet, new Dimension(768, 136), "sims seite"));
+            inputs.add(new Panel(sheet, new Dimension(768, 136), "sims seite", canRotate));
         }
         for (i = 0; i < 1; i++) {
-            inputs.add(new Panel(sheet, new Dimension(600, 76), "sims front"));
+            inputs.add(new Panel(sheet, new Dimension(600, 76), "sims front", canRotate));
         }
         for (i = 0; i < 1; i++) {
-            inputs.add(new Panel(sheet, new Dimension(636, 136), "sims back"));
+            inputs.add(new Panel(sheet, new Dimension(636, 136), "sims back", canRotate));
         }
         for (i = 0; i < 1; i++) {
-            inputs.add(new Panel(sheet, new Dimension(750, 600), "lf"));
+            inputs.add(new Panel(sheet, new Dimension(750, 600), "lf", canRotate));
         }
 
         return makeProject(inputs, 4);

@@ -6,6 +6,7 @@ package com.cutlet.lib.model;
 
 import com.cutlet.lib.material.Material;
 import java.io.Serializable;
+import lombok.NonNull;
 import lombok.ToString;
 
 
@@ -16,10 +17,6 @@ import lombok.ToString;
 @ToString
 public class StockSheet implements Serializable {
 
-    public double getThickness() {
-        return thickness;
-    }
-
     private final Material material;
     private final double thickness;
     private final String title;
@@ -27,7 +24,11 @@ public class StockSheet implements Serializable {
     
 
 
-    public StockSheet(String title, Material material, Dimension dimension, double thickness) {
+    public StockSheet(@NonNull final String title, 
+            @NonNull final Material material, 
+            @NonNull final Dimension dimension, 
+            final double thickness) {
+        
         this.material = material;
         this.dimension = dimension;
         this.thickness = thickness;
@@ -36,5 +37,9 @@ public class StockSheet implements Serializable {
 
     public Dimension getDimension() {
         return dimension;
+    }
+
+    public double getThickness() {
+        return thickness;
     }
 }

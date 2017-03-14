@@ -8,6 +8,7 @@ import com.cutlet.lib.model.Project;
 import com.cutlet.lib.data.cuttree.FreeNode;
 import java.util.List;
 import java.util.logging.Logger;
+import lombok.NonNull;
 import org.jenetics.EnumGene;
 import org.jenetics.Optimize;
 import org.jenetics.engine.Codec;
@@ -26,7 +27,8 @@ public class GAOptimizationStrategy extends AbstractOptimizationStrategy {
     public static java.util.Random random = new java.util.Random();
 
     @Override
-    public OptimizationResult optimize(Project project, FitnessFunction fitness) {
+    public OptimizationResult optimize(@NonNull final Project project, 
+            @NonNull final FitnessFunction fitness) {
 
         final ISeq<Panel> panels = ISeq.of(project.getPanels());
         final Codec<ISeq<Panel>, EnumGene<Panel>> codec = codecs.ofPermutation(panels);
@@ -46,9 +48,9 @@ public class GAOptimizationStrategy extends AbstractOptimizationStrategy {
         return optimizeAux(project, result.asList());
     }
 
-    public OptimizationResult optimizeAux(Project project, List<Panel> panels) {
+    public OptimizationResult optimizeAux(@NonNull final Project project, @NonNull final List<Panel> panels) {
 
-        OptimizationResult optimizationResult = new OptimizationResult();
+        final OptimizationResult optimizationResult = new OptimizationResult();
 
         for (Panel p : panels) {
             FreeNode candidate = findSheet(optimizationResult, p);

@@ -7,6 +7,7 @@ package com.cutlet.lib.testing;
 import com.cutlet.lib.model.Layout;
 import com.cutlet.lib.optimizer.OptimizationResult;
 import java.io.PrintStream;
+import lombok.NonNull;
 
 /**
  *
@@ -14,11 +15,11 @@ import java.io.PrintStream;
  */
 public class ConsoleOutput {
 
-    public static void dumpResult(OptimizationResult r) {
+    public static void dumpResult(@NonNull OptimizationResult r) {
         dumpResult(System.err, r);
     }
     
-    public static void dumpResult(PrintStream out, OptimizationResult r) {
+    public static void dumpResult(@NonNull PrintStream out, @NonNull OptimizationResult r) {
         out.println("");
         out.println("");
         out.println("RESULT");
@@ -28,7 +29,7 @@ public class ConsoleOutput {
         }
     }
 
-    private static void dumpLayout(PrintStream out, Layout l) {
+    private static void dumpLayout(@NonNull PrintStream out, @NonNull Layout l) {
         out.println("layout " + l.getId());
         //dumpSheet(out, l.getCutTree(), 0);
     }

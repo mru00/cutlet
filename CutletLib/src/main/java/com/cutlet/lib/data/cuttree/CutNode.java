@@ -6,6 +6,7 @@ package com.cutlet.lib.data.cuttree;
 
 import com.cutlet.lib.model.Dimension;
 import com.cutlet.lib.model.Position;
+import lombok.NonNull;
 
 
 
@@ -39,9 +40,12 @@ public class CutNode extends AbstractCutTreeNode {
     
     private final double cutLength;
 
-    public CutNode(CutTreeNode parent,
-            double kerf, double cutPosition, Direction direction,
-            Position position, Dimension dimension) {
+    public CutNode(@NonNull final CutTreeNode parent,
+            final double kerf, 
+            final double cutPosition, 
+            @NonNull final Direction direction,
+            @NonNull final Position position, 
+            @NonNull final Dimension dimension) {
         
         super(parent, position, dimension);
 
@@ -93,7 +97,7 @@ public class CutNode extends AbstractCutTreeNode {
     }
     
     @Override
-    public void replaceChild(CutTreeNode from, CutTreeNode to) {
+    public void replaceChild(@NonNull final CutTreeNode from, @NonNull final CutTreeNode to) {
         if (from == target) {
             target = to;
         } else if (from == rest) {

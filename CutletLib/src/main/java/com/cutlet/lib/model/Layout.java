@@ -8,6 +8,7 @@ import com.cutlet.lib.data.cuttree.CutTree;
 import com.cutlet.lib.data.cuttree.CutTreeNode;
 import com.cutlet.lib.data.cuttree.PanelNode;
 import java.io.Serializable;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -21,7 +22,7 @@ public class Layout implements Serializable {
     private final int id;
     private final CutTree cutTree;
 
-    public Layout(StockSheet sheet, int id) {
+    public Layout(@NonNull final StockSheet sheet, final int id) {
         this.sheet = sheet;
         this.id = id;
         this.cutTree = new CutTree(sheet);
@@ -47,7 +48,7 @@ public class Layout implements Serializable {
 
     public int getNumberOfSubSheets() {
         int num = 0;
-        for (CutTreeNode node : getCutTree()) {
+        for (CutTreeNode n : getCutTree()) {
             num++;
         }
         return num;

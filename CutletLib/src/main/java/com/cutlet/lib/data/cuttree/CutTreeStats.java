@@ -24,6 +24,7 @@ public class CutTreeStats {
             final double totalCutLength,
             final double sheetArea,
             final double usedArea) {
+        
         this.numberOfCuts = numberOfCuts;
         this.totalCutLength = totalCutLength;
         this.sheetArea = sheetArea;

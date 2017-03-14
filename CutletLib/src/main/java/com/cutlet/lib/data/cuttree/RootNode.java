@@ -6,6 +6,7 @@ package com.cutlet.lib.data.cuttree;
 
 import com.cutlet.lib.model.Dimension;
 import java.io.Serializable;
+import lombok.NonNull;
 
 /**
  *
@@ -15,7 +16,7 @@ public class RootNode implements CutTreeNode, Serializable {
     private CutTreeNode child;
     private Dimension dimension;
 
-    public RootNode(Dimension dimension) {
+    public RootNode(@NonNull final Dimension dimension) {
         this.dimension = dimension;
     }
     
@@ -23,12 +24,12 @@ public class RootNode implements CutTreeNode, Serializable {
         return child;
     }
 
-    public void setChild(final CutTreeNode child) {
+    public void setChild(@NonNull final CutTreeNode child) {
         this.child = child;
     }
 
     @Override
-    public void replaceChild(CutTreeNode from, CutTreeNode to) {
+    public void replaceChild(@NonNull final CutTreeNode from, @NonNull final CutTreeNode to) {
         assert (child == from);
         child = to;
     }

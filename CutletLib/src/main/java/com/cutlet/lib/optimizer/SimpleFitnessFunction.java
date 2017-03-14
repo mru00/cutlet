@@ -4,6 +4,8 @@
 
 package com.cutlet.lib.optimizer;
 
+import lombok.NonNull;
+
 /**
  *
  * @author rmuehlba
@@ -11,7 +13,7 @@ package com.cutlet.lib.optimizer;
 public class SimpleFitnessFunction implements FitnessFunction {
 
     @Override
-    public double fitness(OptimizationResultStats stats) {
+    public double fitness(@NonNull OptimizationResultStats stats) {
         return stats.getSheetArea() * stats.getTotalCutLength() / 1e5;
     }
 }

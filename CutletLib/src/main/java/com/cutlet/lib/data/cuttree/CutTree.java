@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
+import lombok.NonNull;
 
 /**
  *
@@ -21,7 +22,7 @@ public class CutTree implements Iterable<CutTreeNode>, Serializable {
 
     private final RootNode root;
 
-    public CutTree(StockSheet sheet) {
+    public CutTree(@NonNull final StockSheet sheet) {
         root = new RootNode(sheet.getDimension());
         final FreeNode free = new FreeNode(root, new Position(0, 0), sheet.getDimension());
         root.setChild(free);
@@ -79,7 +80,7 @@ public class CutTree implements Iterable<CutTreeNode>, Serializable {
 
         private final Queue<CutTreeNode> queue = new ArrayDeque<>();
 
-        CutTreeIterator(CutTree tree) {
+        CutTreeIterator(@NonNull final CutTree tree) {
             queue.add(root.getChild());
         }
 

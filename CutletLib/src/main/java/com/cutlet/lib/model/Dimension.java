@@ -18,7 +18,7 @@ public class Dimension implements Serializable{
     private double length;
     private double width;
 
-    public Dimension(double length, double width) {
+    public Dimension(final double length, final double width) {
         this.length = length;
         this.width = width;
     }
@@ -27,7 +27,7 @@ public class Dimension implements Serializable{
         return length;
     }
 
-    public void setLength(double length) {
+    public void setLength(final double length) {
         this.length = length;
     }
 
@@ -35,7 +35,7 @@ public class Dimension implements Serializable{
         return width;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(final double width) {
         this.width = width;
     }
 
@@ -43,7 +43,11 @@ public class Dimension implements Serializable{
         return getLength() * getWidth();
     }
 
-    public boolean canHold(@NonNull Dimension other) {
+    public boolean canHold(@NonNull final Dimension other) {
         return other.getLength() <= this.getLength() && other.getWidth() <= this.getWidth();
     }    
+    
+    public Dimension rotated() {
+        return new Dimension(width, length);
+    }
 }

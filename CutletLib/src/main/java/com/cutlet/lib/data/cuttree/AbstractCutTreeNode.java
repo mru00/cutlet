@@ -7,6 +7,7 @@ package com.cutlet.lib.data.cuttree;
 import com.cutlet.lib.model.Dimension;
 import com.cutlet.lib.model.Panel;
 import com.cutlet.lib.model.Position;
+import lombok.NonNull;
 
 /**
  *
@@ -19,13 +20,16 @@ public abstract class AbstractCutTreeNode implements CutTreeNode {
     private final Position position;
     private final Dimension dimension;
 
-    public AbstractCutTreeNode(CutTreeNode parent, Position position, Dimension dimension) {
+    public AbstractCutTreeNode(@NonNull final CutTreeNode parent, 
+            @NonNull final Position position, 
+            @NonNull final Dimension dimension) {
+        
         this.dimension = dimension;
         this.position = position;
         this.parent = parent;
     }
 
-    public boolean canHold(Panel p) {
+    public boolean canHold(@NonNull final Panel p) {
         return getDimension().canHold(p.getDimension());
     }
 

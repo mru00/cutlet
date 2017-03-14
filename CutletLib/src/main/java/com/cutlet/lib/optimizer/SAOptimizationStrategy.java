@@ -13,6 +13,7 @@ import com.cutlet.lib.tneller.State;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import lombok.NonNull;
 
 /**
  *
@@ -24,7 +25,7 @@ public class SAOptimizationStrategy extends AbstractOptimizationStrategy {
     public static java.util.Random random = new java.util.Random();
 
     @Override
-    public OptimizationResult optimize(Project project, FitnessFunction fitness) {
+    public OptimizationResult optimize(@NonNull Project project, @NonNull FitnessFunction fitness) {
 
         final int ITERATIONS = 10000;
 
@@ -45,7 +46,7 @@ public class SAOptimizationStrategy extends AbstractOptimizationStrategy {
         return minState.result;
     }
 
-    public OptimizationResult optimizeAux(Project project, List<Panel> panels) {
+    public OptimizationResult optimizeAux(@NonNull Project project, @NonNull List<Panel> panels) {
 
         OptimizationResult optimizationResult = new OptimizationResult();
 
@@ -71,7 +72,7 @@ public class SAOptimizationStrategy extends AbstractOptimizationStrategy {
         int[] prevPerm;
         OptimizationResult result;
 
-        public OptState(Project project, FitnessFunction fitness) {
+        public OptState(@NonNull Project project, @NonNull FitnessFunction fitness) {
             this.project = project;
             this.fitness = fitness;
         }
@@ -100,7 +101,7 @@ public class SAOptimizationStrategy extends AbstractOptimizationStrategy {
             return fitness.fitness(result.getStats());
         }
 
-        List<Panel> lookup(List<Panel> input, int[] lookup) {
+        List<Panel> lookup(@NonNull List<Panel> input, int[] lookup) {
             List<Panel> newArr = new ArrayList<>();
             for (int i : lookup) {
                 newArr.add(input.get(i));

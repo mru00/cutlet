@@ -10,6 +10,7 @@ import com.cutlet.lib.data.cuttree.CutTreeStats;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -21,7 +22,7 @@ public class OptimizationResult implements Serializable {
 
     private final List<Layout> layouts = new ArrayList<>();
 
-    public void createNewLayout(Panel p) {
+    public void createNewLayout(@NonNull Panel p) {
         addLayout(new Layout(p.getSheet(), layouts.size()));
     }
 

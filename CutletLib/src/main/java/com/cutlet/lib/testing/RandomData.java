@@ -16,7 +16,7 @@ import java.util.Random;
  *
  * @author rmuehlba
  */
-public class RandomData extends AbstractTestkData {
+public class RandomData extends AbstractTestData {
 
     private final int seed;
 
@@ -32,11 +32,12 @@ public class RandomData extends AbstractTestkData {
 
         StockSheet sheet = makeSheet(800, 600);
 
+        final boolean canRotate = false;
         List<Panel> inputs = new ArrayList<>();
         for (int i = 0; i < panelCount; i++) {
             double x = rng.nextInt(300);
             double y = rng.nextInt(300);
-            inputs.add(new Panel(sheet, new Dimension(x, y), "p" + i));
+            inputs.add(new Panel(sheet, new Dimension(x, y), "p" + i, canRotate));
         }
         return makeProject(inputs, 1);
     }

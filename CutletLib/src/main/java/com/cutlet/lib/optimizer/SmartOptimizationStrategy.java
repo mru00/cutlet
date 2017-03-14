@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import lombok.NonNull;
 
 /**
  *
@@ -23,7 +24,7 @@ public class SmartOptimizationStrategy extends AbstractOptimizationStrategy {
     private static final Logger log = Logger.getLogger(SmartOptimizationStrategy.class.getName());
 
     @Override
-    public OptimizationResult optimize(Project project, FitnessFunction fitness) {
+    public OptimizationResult optimize(@NonNull Project project, @NonNull FitnessFunction fitness) {
 
         List<Panel> panels = project.getPanels().stream()
                 .sorted((b, a) -> Double.compare(a.getDimension().getArea(), b.getDimension().getArea()))

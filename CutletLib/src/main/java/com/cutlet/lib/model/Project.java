@@ -24,7 +24,7 @@ public class Project implements Serializable {
         return panels;
     }
 
-    public void setPanels(@NonNull List<Panel> inputs) {
+    public void setPanels(@NonNull final List<Panel> inputs) {
         this.panels = inputs;
     }
 
@@ -32,7 +32,7 @@ public class Project implements Serializable {
         return bladeWidth;
     }
 
-    public void setBladeWidth(double bladeWidth) {
+    public void setBladeWidth(final double bladeWidth) {
         if (bladeWidth < 0) {
             throw new IllegalArgumentException("bladeWidth can't be negative");
         }
@@ -44,7 +44,7 @@ public class Project implements Serializable {
         return optimizationResult;
     }
 
-    public void setOptimizationResult(OptimizationResult optimizationResult) {
+    public void setOptimizationResult(@NonNull final OptimizationResult optimizationResult) {
         this.optimizationResult = optimizationResult;
     }
     

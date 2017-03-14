@@ -5,6 +5,7 @@
 package com.cutlet.lib.model;
 
 import java.io.Serializable;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -17,17 +18,23 @@ public class Panel implements Serializable {
     private final String title;
     private final StockSheet sheet;
     private final Dimension dimension;
+    private final boolean canRotate;
 
     public String getTitle() {
         return title;
     }
 
-    public Panel(StockSheet sheet, Dimension dimension, String title) {
+    public Panel(@NonNull final StockSheet sheet, 
+            @NonNull final Dimension dimension, 
+            @NonNull final String title, 
+            final boolean canRotate) {
+        
         this.sheet = sheet;
         this.title = title;
         this.dimension = dimension;
+        this.canRotate = canRotate;
         
-        if (getDimension().getWidth() > sheet.getDimension().getWidth() || getDimension().getLength() > sheet.getDimension().getLength()) {
+        if (dimension.getWidth() > sheet.getDimension().getWidth() || dimension.getLength() > sheet.getDimension().getLength()) {
             throw new RuntimeException("panel too large for sheet");
         }
     }

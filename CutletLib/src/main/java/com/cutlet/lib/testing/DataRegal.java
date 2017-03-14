@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author rmuehlba
  */
-public class DataRegal extends AbstractTestkData {
+public class DataRegal extends AbstractTestData {
 
     @Override
     public Project getData() {
@@ -24,19 +24,19 @@ public class DataRegal extends AbstractTestkData {
         int i;
         
         final double w = 600;
-        
+        final boolean canRotate = false;
         List<Panel> inputs = new ArrayList<>();
         for (i = 0; i < 8; i++) {
-            inputs.add(new Panel(sheet, new Dimension(500, w), "side short"));
+            inputs.add(new Panel(sheet, new Dimension(500, w), "side short", canRotate));
         }
         for (i = 0; i < 4; i++) {
-            inputs.add(new Panel(sheet, new Dimension(560, w), "side long"));
+            inputs.add(new Panel(sheet, new Dimension(560, w), "side long", canRotate));
         }
         for (i = 0; i < 12; i++) {
-            inputs.add(new Panel(sheet, new Dimension(450, w), "top_bottom"));
+            inputs.add(new Panel(sheet, new Dimension(450, w), "top_bottom", canRotate));
         }
         for (i = 0; i < 16; i++) {
-            inputs.add(new Panel(sheet, new Dimension(25, w), "halter"));
+            inputs.add(new Panel(sheet, new Dimension(25, w), "halter", canRotate));
         }
 
         return makeProject(inputs, 4);
