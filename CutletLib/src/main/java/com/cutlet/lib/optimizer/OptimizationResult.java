@@ -21,6 +21,7 @@ import lombok.ToString;
 public class OptimizationResult implements Serializable {
 
     private final List<Layout> layouts = new ArrayList<>();
+    private double runtime;
 
     public void createNewLayout(@NonNull Panel p) {
         addLayout(new Layout(p.getSheet(), layouts.size()));
@@ -60,4 +61,14 @@ public class OptimizationResult implements Serializable {
     public List<Layout> getLayouts() {
         return layouts;
     }
+
+    public double getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(double runtime) {
+        this.runtime = runtime;
+    }
+
+
 }

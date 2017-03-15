@@ -72,7 +72,7 @@ public class OptimizerBenchmark {
 
         final PrintStream output = System.err;
 
-        output.println(String.format("%-10s %-13s %10s %10s %10s %10s %10s %10s",
+        output.println(String.format("%-10s %-13s %10s %10s %10s %10s %10s %10s %10s",
                 "Method",
                 "dataset",
                 "#panels",
@@ -80,7 +80,8 @@ public class OptimizerBenchmark {
                 "waste%",
                 "#cuts",
                 "cutlength",
-                "fitness"));
+                "fitness",
+                "runtime"));
 
         for (String opt : optimizers) {
             for (TestData b : benchmarks) {
@@ -95,7 +96,7 @@ public class OptimizerBenchmark {
 
                 OptimizationResultStats stats = result.getStats();
 
-                output.println(String.format("%-10s %-13s %10d %10d %10.1f %10d %10.0f %10.1f",
+                output.println(String.format("%-10s %-13s %10d %10d %10.1f %10d %10.0f %10.1f %10.0f",
                         opt,
                         b.getTitle(),
                         nPanelsExp,
@@ -103,7 +104,8 @@ public class OptimizerBenchmark {
                         stats.getWastagePercent(),
                         stats.getNumberOfCuts(),
                         stats.getTotalCutLength(),
-                        (new SimpleFitnessFunction()).fitness(stats)));
+                        (new SimpleFitnessFunction()).fitness(stats),
+                        result.getRuntime()));
 
                 assert (nPanelsAct == nPanelsExp);
 

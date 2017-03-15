@@ -24,7 +24,7 @@ import lombok.NonNull;
  */
 public class CutLayoutDrawer {
 
-    public void drawOptimizationResult(@NonNull Pane pane, @NonNull OptimizationResult result) {
+    public void drawOptimizationResult(@NonNull final Pane pane, @NonNull final OptimizationResult result) {
 
         for (Layout layout : result.getLayouts()) {
             Dimension dim = scale(layout.getSheet().getDimension());
@@ -143,12 +143,12 @@ public class CutLayoutDrawer {
     }
 
     private Dimension scale(Dimension dim) {
-        final double scale = 0.5;
+        final double scale = 1;
         return new Dimension(dim.getLength() * scale, dim.getWidth() * scale);
     }
 
     private Position scale(Position dim) {
-        final double scale = 0.5;
+        final double scale = 1;
         return new Position(dim.getX() * scale, dim.getY() * scale);
     }
 
