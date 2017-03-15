@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 rudolf.muehlbauer@intel.com
+ * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
 
 package com.cutlet.lib.model;
@@ -8,6 +8,7 @@ import com.cutlet.lib.optimizer.OptimizationResult;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lombok.NonNull;
 
 /**
@@ -18,7 +19,7 @@ public class Project implements Serializable {
 
     private List<Panel> panels = new ArrayList<>();
     private double bladeWidth = 3;
-    private OptimizationResult optimizationResult = null;
+    private Optional<OptimizationResult> optimizationResult;
 
     public List<Panel> getPanels() {
         return panels;
@@ -40,12 +41,12 @@ public class Project implements Serializable {
         this.bladeWidth = bladeWidth;
     }
 
-    public OptimizationResult getOptimizationResult() {
+    public Optional<OptimizationResult> getOptimizationResult() {
         return optimizationResult;
     }
 
     public void setOptimizationResult(@NonNull final OptimizationResult optimizationResult) {
-        this.optimizationResult = optimizationResult;
+        this.optimizationResult.of(optimizationResult);
     }
     
     

@@ -1,11 +1,12 @@
 /*
- * Copyright (C) 2017 rudolf.muehlbauer@intel.com
+ * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
 package com.cutlet.lib.optimizer;
 
 import com.cutlet.lib.model.Panel;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.data.cuttree.FreeNode;
+import com.cutlet.lib.errors.OptimizationFailedException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,10 +25,10 @@ public class PermutationOptimizationStrategy extends AbstractOptimizationStrateg
     private final Logger log = Logger.getLogger("PermutationOptimizationStrategy");
 
     @Override
-    public OptimizationResult optimize(Project project, FitnessFunction fitness) {
+    public OptimizationResult optimize(Project project, FitnessFunction fitness) throws OptimizationFailedException {
 
         if (project.getPanels().size() > 10) {
-            throw new RuntimeException("Permutation calculation for n > 10");
+            throw new OptimizationFailedException("Permutation calculation for n > 10");
         }
         Permutations<Panel> perm = new Permutations<>(project.getPanels().toArray(new Panel[]{}));
 

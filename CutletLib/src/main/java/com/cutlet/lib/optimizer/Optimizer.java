@@ -1,8 +1,9 @@
 /*
- * Copyright (C) 2017 rudolf.muehlbauer@intel.com
+ * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
 package com.cutlet.lib.optimizer;
 
+import com.cutlet.lib.errors.EmptyProjectException;
 import com.cutlet.lib.model.Project;
 import com.google.common.base.Stopwatch;
 import java.util.concurrent.TimeUnit;
@@ -17,11 +18,10 @@ public class Optimizer {
     
     private Logger log = Logger.getLogger("Optimizer");
     
-    public OptimizationResult optimize(@NonNull Project project, @NonNull OptimizationStrategy strategy) {
+    public OptimizationResult optimize(@NonNull Project project, @NonNull OptimizationStrategy strategy) throws EmptyProjectException {
         
         if (project.getPanels().isEmpty()) {
-            log.info("Project doesn't have any panels configured; nothing to optimize");
-            return new OptimizationResult();
+            throw new EmptyProjectException("Project doesn't have any panels configured; nothing to optimize");
         }
         
         log.info("starting optimization");
@@ -32,7 +32,6 @@ public class Optimizer {
         OptimizationResult result = strategy.optimize(project, fitness);
         result.setRuntime(stopwatch.elapsed(TimeUnit.MILLISECONDS));
         
-        result.finishConstruction();
         log.info(String.format("finished optimization. #sheets=%d, result=%s", result.getLayouts().size(), result));
         return result;
     }

@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2017 rudolf.muehlbauer@intel.com
+ * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
 package com.cutlet.lib.optimizer;
 
 import com.cutlet.lib.model.Panel;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.data.cuttree.FreeNode;
+import com.cutlet.lib.errors.OptimizationFailedException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.NonNull;
 import xyz.thepathfinder.simulatedannealing.InfeasibleProblemException;
@@ -28,7 +28,7 @@ public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
     public static java.util.Random random = new java.util.Random();
 
     @Override
-    public OptimizationResult optimize(@NonNull Project project, @NonNull FitnessFunction fitness) {
+    public OptimizationResult optimize(@NonNull Project project, @NonNull FitnessFunction fitness) throws OptimizationFailedException {
         try {
             // higher numbers will break travis CI unit tests...
             int NUMBER_OF_STEPS = 10000;
@@ -41,9 +41,8 @@ public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
 
             return solution.result;
         } catch (InfeasibleProblemException ex) {
-            log.log(Level.SEVERE, null, ex);
+            throw new OptimizationFailedException(ex);
         }
-        return null;
     }
 
     public OptimizationResult optimizeAux(@NonNull Project project, @NonNull List<Panel> panels) {

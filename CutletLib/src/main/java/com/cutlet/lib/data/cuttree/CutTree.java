@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 rudolf.muehlbauer@intel.com
+ * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
 
 package com.cutlet.lib.data.cuttree;

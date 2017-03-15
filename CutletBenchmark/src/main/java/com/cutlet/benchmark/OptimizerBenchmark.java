@@ -1,10 +1,11 @@
 /*
- * Copyright (C) 2017 rudolf.muehlbauer@intel.com
+ * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
 
 
 package com.cutlet.benchmark;
 
+import com.cutlet.lib.errors.EmptyProjectException;
 import com.cutlet.lib.testing.RandomData;
 import com.cutlet.lib.testing.Data1;
 import com.cutlet.lib.testing.TestData;
@@ -85,31 +86,40 @@ public class OptimizerBenchmark {
 
         for (String opt : optimizers) {
             for (TestData b : benchmarks) {
-                final OptimizationStrategy strategy = createStrategy(opt);
-                final Optimizer optimizer = new Optimizer();
-                final Project project = b.getData();
-                saveProject(project);
-                final OptimizationResult result = optimizer.optimize(project, strategy);
+                try {
+                    final OptimizationStrategy strategy = createStrategy(opt);
+                    final Optimizer optimizer = new Optimizer();
+                    final Project project = b.getData();
+                    saveProject(project);
+                    final OptimizationResult result = optimizer.optimize(project, strategy);
+                    
+                    final int nPanelsAct = sumNumberOfPanels(result);
+                    final int nPanelsExp = project.getPanels().size();
+                    
+                    OptimizationResultStats stats = result.getStats();
+                    
+                    output.println(String.format("%-10s %-13s %10d %10d %10.1f %10d %10.0f %10.1f %10.0f",
+                            opt,
+                            b.getTitle(),
+                            nPanelsExp,
+                            stats.getNumberOfLayouts(),
+                            stats.getWastagePercent(),
+                            stats.getNumberOfCuts(),
+                            stats.getTotalCutLength(),
+                            (new SimpleFitnessFunction()).fitness(stats),
+                            result.getRuntime()));
+                    
+                    assert (nPanelsAct == nPanelsExp);
+                    
+                    //ConsoleOutput.dumpResult(result);
+                } catch (EmptyProjectException ex) {
+                    Logger.getLogger(OptimizerBenchmark.class.getName()).log(Level.SEVERE, null, ex);
+                    output.println(String.format("%-10s %-13s failed: %s",
+                            opt,
+                            b.getTitle(),
+                            ex.getMessage()));
 
-                final int nPanelsAct = sumNumberOfPanels(result);
-                final int nPanelsExp = project.getPanels().size();
-
-                OptimizationResultStats stats = result.getStats();
-
-                output.println(String.format("%-10s %-13s %10d %10d %10.1f %10d %10.0f %10.1f %10.0f",
-                        opt,
-                        b.getTitle(),
-                        nPanelsExp,
-                        stats.getNumberOfLayouts(),
-                        stats.getWastagePercent(),
-                        stats.getNumberOfCuts(),
-                        stats.getTotalCutLength(),
-                        (new SimpleFitnessFunction()).fitness(stats),
-                        result.getRuntime()));
-
-                assert (nPanelsAct == nPanelsExp);
-
-                //ConsoleOutput.dumpResult(result);
+                }
             }
         }
     }

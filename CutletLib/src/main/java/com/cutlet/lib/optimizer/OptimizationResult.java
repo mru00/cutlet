@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 rudolf.muehlbauer@intel.com
+ * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
 
 package com.cutlet.lib.optimizer;
@@ -29,12 +29,6 @@ public class OptimizationResult implements Serializable {
 
     private void addLayout(Layout l) {
         layouts.add(l);
-    }
-
-    /**
-     * call when result is finished, i.e. all layouts are added
-     */
-    public void finishConstruction() {
     }
 
     public OptimizationResultStats getStats() {
