@@ -16,6 +16,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
 import lombok.NonNull;
 
 /**
@@ -28,7 +30,7 @@ public class CutLayoutDrawer {
 
         for (Layout layout : result.getLayouts()) {
             Dimension dim = scale(layout.getSheet().getDimension());
-            Canvas canvas = new Canvas(dim.getLength(), dim.getWidth());
+            Canvas canvas = new Canvas(dim.getLength() + 2, dim.getWidth() + 2);
 
             StackPane canvasContainer = new StackPane(canvas);
             canvasContainer.getStyleClass().add("layoutcanvas");
@@ -45,6 +47,16 @@ public class CutLayoutDrawer {
         gc.save();
         gc.setGlobalAlpha(1);
         gc.setLineWidth(1);
+
+        gc.save();
+        gc.setStroke(Color.BLUE);
+        gc.setLineWidth(1);
+        gc.setLineCap(StrokeLineCap.BUTT);
+        gc.setLineJoin(StrokeLineJoin.ROUND);
+        gc.strokeRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        gc.restore();
+
+        gc.translate(1, 1);
 
         drawLayout(gc, layout, 0);
         drawText(gc, layout, 0);
@@ -68,16 +80,21 @@ public class CutLayoutDrawer {
 
                 final CutNode cut = (CutNode) node;
                 final Position cutpos = scale(cut.getCutPos());
-                final Dimension cutdim = scale(cut.getCutDim());
                 gc.save();
                 gc.setFill(Color.BLACK);
                 gc.setStroke(Color.BLACK);
-                gc.setLineWidth(0);
+                gc.setLineWidth(scale(cut.getKerf()));
+                gc.setLineDashes(5, 10);
 
-                gc.fillRect((int) (cutpos.getX()),
-                        (int) (cutpos.getY()),
-                        (int) (cutdim.getLength()),
-                        (int) (cutdim.getWidth()));
+                final double x = cutpos.getX();
+                final double y = cutpos.getY();
+                final double l = scale(cut.getCutLength());
+                final double w2 = scale(cut.getKerf() / 2.0);
+                if (cut.getDirection() == CutNode.Direction.HORIZONTAL) {
+                    gc.strokeLine(x, y + w2, x + l, y + w2);
+                } else {
+                    gc.strokeLine(x + w2, y, x + w2, y + l);
+                }
                 gc.restore();
 
             } else if (node instanceof PanelNode) {
@@ -86,16 +103,11 @@ public class CutLayoutDrawer {
                 final Position pos = scale(panelNode.getPosition());
                 final Dimension dim = scale(panelNode.getDimension());
 
-                final int xp = (int) (pos.getX());
-                final int yp = (int) (pos.getY());
-                final int wp = (int) (dim.getLength());
-                final int hp = (int) (dim.getWidth());
-
                 gc.save();
                 gc.setFill(Color.PINK);
                 gc.setStroke(Color.BLACK);
                 gc.setLineWidth(1);
-                gc.fillRect(xp, yp, wp, hp);
+                gc.fillRect(pos.getX(), pos.getY(), dim.getLength(), dim.getWidth());
                 gc.restore();
             }
         }
@@ -124,17 +136,16 @@ public class CutLayoutDrawer {
                 final Panel panel = panelNode.getPanel();
 
                 final Position pos = scale(panelNode.getPosition());
-                final int xp = (int) (pos.getX());
-                final int yp = (int) (pos.getY());
 
                 gc.save();
                 gc.setGlobalAlpha(1);
                 gc.setFill(Color.BLACK);
-                gc.fillText(String.format("%s (%d x %d)",
+                gc.fillText(String.format("%s (%.1f x %.1f)",
                         panel.getTitle(),
-                        (int) panel.getDimension().getLength(),
-                        (int) panel.getDimension().getWidth()),
-                        xp + 10, yp + 20);
+                        panel.getDimension().getLength(),
+                        panel.getDimension().getWidth()),
+                        pos.getX() + 10,
+                        pos.getY() + 20);
 
                 gc.restore();
 
@@ -142,13 +153,17 @@ public class CutLayoutDrawer {
         }
     }
 
+    private static final double scale = 1;
+
+    private double scale(double dim) {
+        return dim * scale;
+    }
+
     private Dimension scale(Dimension dim) {
-        final double scale = 1;
         return new Dimension(dim.getLength() * scale, dim.getWidth() * scale);
     }
 
     private Position scale(Position dim) {
-        final double scale = 1;
         return new Position(dim.getX() * scale, dim.getY() * scale);
     }
 

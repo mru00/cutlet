@@ -38,7 +38,9 @@ public class CutNode extends AbstractCutTreeNode {
     private final Position cutPos;
     private final Dimension cutDim;
     
+    private final double kerf;
     private final double cutLength;
+    private final Direction direction;
 
     public CutNode(@NonNull final CutTreeNode parent,
             final double kerf, 
@@ -82,6 +84,8 @@ public class CutNode extends AbstractCutTreeNode {
 
         this.target = new FreeNode(this, targetPosition, targetDimension);
         this.rest = new FreeNode(this, restPosition, restDimension);
+        this.direction = direction;
+        this.kerf = kerf;
     }
 
     public CutTreeNode getTarget() {
@@ -113,6 +117,14 @@ public class CutNode extends AbstractCutTreeNode {
 
     public Dimension getCutDim() {
         return cutDim;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public double getKerf() {
+        return kerf;
     }
 
 }
