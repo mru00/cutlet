@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -80,7 +81,7 @@ public class Cutlet extends Application {
     }
 
     private static ResourceBundle getBundle() {
-        return ResourceBundle.getBundle("Bundle");
+        return ResourceBundle.getBundle("Bundle", Locale.GERMANY);
     }
 
 }

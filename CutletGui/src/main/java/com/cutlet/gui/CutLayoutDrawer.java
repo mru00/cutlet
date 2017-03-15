@@ -30,7 +30,10 @@ public class CutLayoutDrawer {
 
         for (Layout layout : result.getLayouts()) {
             Dimension dim = scale(layout.getSheet().getDimension());
-            Canvas canvas = new Canvas(dim.getLength() + 2, dim.getWidth() + 2);
+            
+            final int spaceForBorder = 2;
+            Canvas canvas = new Canvas(dim.getLength() + spaceForBorder, 
+                    dim.getWidth() + spaceForBorder);
 
             StackPane canvasContainer = new StackPane(canvas);
             canvasContainer.getStyleClass().add("layoutcanvas");
@@ -153,7 +156,7 @@ public class CutLayoutDrawer {
         }
     }
 
-    private static final double scale = 1;
+    private static final double scale = 0.5;
 
     private double scale(double dim) {
         return dim * scale;

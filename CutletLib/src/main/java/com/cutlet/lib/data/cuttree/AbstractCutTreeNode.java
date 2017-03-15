@@ -7,13 +7,14 @@ package com.cutlet.lib.data.cuttree;
 import com.cutlet.lib.model.Dimension;
 import com.cutlet.lib.model.Panel;
 import com.cutlet.lib.model.Position;
+import java.io.Serializable;
 import lombok.NonNull;
 
 /**
  *
  * @author rmuehlba
  */
-public abstract class AbstractCutTreeNode implements CutTreeNode {
+public abstract class AbstractCutTreeNode implements CutTreeNode, Serializable {
 
     private final CutTreeNode parent;
 

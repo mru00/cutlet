@@ -5,6 +5,8 @@
  */
 package com.cutlet.lib.optimizer;
 
+import com.cutlet.lib.errors.EmptyProjectException;
+import com.cutlet.lib.errors.OptimizationFailedException;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.testing.DataRegal;
 import org.junit.After;
@@ -43,7 +45,7 @@ public class OptimizerTest {
      * Test of optimize method, of class Optimizer.
      */
     @org.junit.Test
-    public void testOptimize() {
+    public void testOptimize() throws EmptyProjectException, OptimizationFailedException {
         System.out.println("optimize");
         Project project = (new DataRegal()).getData();
         OptimizationStrategy strategy = new SAOptimizationStrategy();

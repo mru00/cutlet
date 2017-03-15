@@ -19,14 +19,21 @@ public class OptimizationResultStats {
     private final double sheetArea;
     private final double usedArea;
     private final double wastagePercent;
+    private final double boundingBoxArea;
 
-    public OptimizationResultStats(int numberOfLayouts, int numberOfCuts, double totalCutLength, double sheetArea, double usedArea) {
+    public OptimizationResultStats(int numberOfLayouts, 
+            int numberOfCuts, 
+            double totalCutLength, 
+            double sheetArea, 
+            double usedArea,
+            double boundingBoxArea) {
         this.numberOfLayouts = numberOfLayouts;
         this.numberOfCuts = numberOfCuts;
         this.totalCutLength = totalCutLength;
         this.sheetArea = sheetArea;
         this.usedArea = usedArea;
         this.wastagePercent = 100 * (1 - (usedArea / sheetArea));
+        this.boundingBoxArea = boundingBoxArea;
     }
 
     public int getNumberOfCuts() {
@@ -53,4 +60,7 @@ public class OptimizationResultStats {
         return numberOfLayouts;
     }
 
+    public double getBoundingBoxArea() {
+        return boundingBoxArea;
+    }
 }

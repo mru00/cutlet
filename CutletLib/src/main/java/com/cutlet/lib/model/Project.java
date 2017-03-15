@@ -1,14 +1,17 @@
 /*
  * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
-
 package com.cutlet.lib.model;
 
 import com.cutlet.lib.optimizer.OptimizationResult;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
+// we use guava's Optional here, because it is serializable, jdks is not
+// http://stackoverflow.com/a/39637752/1689451
+import com.google.common.base.Optional;
+
 import lombok.NonNull;
 
 /**
@@ -45,9 +48,18 @@ public class Project implements Serializable {
         return optimizationResult;
     }
 
-    public void setOptimizationResult(@NonNull final OptimizationResult optimizationResult) {
-        this.optimizationResult.of(optimizationResult);
+    public void setOptimizationResult(@NonNull final Optional<OptimizationResult> optimizationResult) {
+        this.optimizationResult = optimizationResult;
     }
-    
-    
+
+    public void setOptimizationResult(java.util.Optional<OptimizationResult> newValue) {
+        if (newValue.isPresent()) {
+            this.optimizationResult = Optional.of(newValue.get());
+
+        } else {
+            this.optimizationResult = Optional.absent();
+
+        }
+    }
+
 }

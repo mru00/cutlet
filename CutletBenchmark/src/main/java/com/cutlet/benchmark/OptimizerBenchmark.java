@@ -6,6 +6,7 @@
 package com.cutlet.benchmark;
 
 import com.cutlet.lib.errors.EmptyProjectException;
+import com.cutlet.lib.errors.OptimizationFailedException;
 import com.cutlet.lib.testing.RandomData;
 import com.cutlet.lib.testing.Data1;
 import com.cutlet.lib.testing.TestData;
@@ -112,13 +113,13 @@ public class OptimizerBenchmark {
                     assert (nPanelsAct == nPanelsExp);
                     
                     //ConsoleOutput.dumpResult(result);
-                } catch (EmptyProjectException ex) {
+
+                } catch (OptimizationFailedException ex) {
                     Logger.getLogger(OptimizerBenchmark.class.getName()).log(Level.SEVERE, null, ex);
                     output.println(String.format("%-10s %-13s failed: %s",
                             opt,
                             b.getTitle(),
                             ex.getMessage()));
-
                 }
             }
         }

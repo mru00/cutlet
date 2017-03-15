@@ -3,6 +3,8 @@
  */
 package com.cutlet.gui;
 
+import com.cutlet.lib.errors.OptimizationFailedException;
+import com.cutlet.lib.model.Panel;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.optimizer.GAOptimizationStrategy;
 import com.cutlet.lib.optimizer.OptimizationResult;
@@ -19,23 +21,32 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.util.MissingResourceException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
-import javafx.application.Platform;
+import javafx.beans.binding.StringBinding;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import lombok.NonNull;
 
 /**
  * FXML Controller class
@@ -45,17 +56,23 @@ import javafx.stage.Stage;
 public class MainSceneController implements Initializable {
 
     @FXML
+    private TableColumn panelTableName, panelTableCount, panelTableLength, panelTableWidth;
+
+    @FXML
+    private TableView<PanelAdapter> panelTable;
+
+    @FXML
     private FlowPane flowPane;
 
     @FXML
     private Label statusBarLabel;
 
-    private Project project;
+    private Optional<Project> project = Optional.empty();
     private ResourceBundle rb;
     private Stage stage;
     private final static Logger log = Logger.getLogger("MainSceneController");
     private final CutLayoutDrawer layoutDrawer = new CutLayoutDrawer();
-    private File currentFile = null;
+    private Optional<File> currentFile = Optional.empty();
     private final Preferences prefs = Preferences.userNodeForPackage(MainSceneController.class);
 
     private final BooleanProperty noProjectLoaded = new SimpleBooleanProperty(true);
@@ -64,36 +81,56 @@ public class MainSceneController implements Initializable {
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
+    private static final String STATUS_OPTIMIZATION_FAILED = "status.optimization.failed";
+    private static final String STATUS_OPTIMIZATION_FINISHED_SUCCESS = "status.optimization.finished_success";
+    private static final String STATUS_OPTIMIZATION_IN_PROGRESS = "status.optimization.in_progress";
+    private static final String DLG_OPEN_TITLE = "dlg.open.title";
+    private static final String CUTLET_PROJECT = "CUTLET_PROJECT";
+    private static final String DLG_SAVE_AS_TITLE = "dlg.save_as.title";
+
+    private final ObservableList<PanelAdapter> panelTableData
+            = FXCollections.observableArrayList(
+                    new PanelAdapter("Jacob", 1, 1, 1),
+                    new PanelAdapter("Isabella", 10, 100, 100)
+            );
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.rb = rb;
         cantSaveFile.bind(fileOpen.not());
-        setCurrentFile(null);
+        assert (flowPane != null);
+        assert (panelTable != null);
+
+        panelTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        panelTableCount.setCellValueFactory(new PropertyValueFactory<PanelAdapter, Integer>("count"));
+        panelTableLength.setCellValueFactory(new PropertyValueFactory<PanelAdapter, Double>("length"));
+        panelTableWidth.setCellValueFactory(new PropertyValueFactory<PanelAdapter, Double>("width"));
+
+        panelTable.setItems(panelTableData);
     }
 
     private void renderLayout(OptimizationResult result) {
-        assert (flowPane != null);
         flowPane.getChildren().clear();
         layoutDrawer.drawOptimizationResult(flowPane, result);
     }
 
-    private void setupFileChooserExtensionFilter(FileChooser chooser) {
+    private void setupFileChooserExtensionFilter(@NonNull final FileChooser chooser) {
         chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter(i18n("CUTLET_PROJECT"), "*.cutlet")
+                new FileChooser.ExtensionFilter(i18n(CUTLET_PROJECT), "*.cutlet")
         );
-
     }
 
-    private void saveProject(Project project, File file) {
+    private void saveProject(@NonNull final Project project, @NonNull final File file) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
             oos.writeObject(project);
             log.info("saved to " + file.getAbsolutePath());
         } catch (Exception ex) {
+            log.log(Level.SEVERE, "failed to save project", ex);
             ex.printStackTrace();
         }
     }
 
-    private Project loadProject(File file) {
+    private Project loadProject(@NonNull final File file) {
         try (ObjectInput input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));) {
             //deserialize the List
             final Project newProject = (Project) input.readObject();
@@ -108,40 +145,46 @@ public class MainSceneController implements Initializable {
     }
 
     private String i18n(String key) {
-        return rb.getString(key);
+        try {
+            return rb.getString(key);
+        } catch (MissingResourceException ex) {
+            log.info("failed to i18n '" + key + "'");
+            return "i18n(" + key + ")";
+        }
     }
 
     private void resetCanvas() {
         flowPane.getChildren().clear();
-        //GraphicsContext gc = canvas.getGraphicsContext2D();
-        //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
 // <editor-fold defaultstate="expanded" desc="actions">
     @FXML
     protected void ex1(ActionEvent event) {
-        setCurrentFile(null);
-        setProject((new DataTable()).getData());
+        setCurrentFile(Optional.empty());
+        setProject(Optional.of((new DataTable()).getData()));
     }
 
     @FXML
     protected void ex2(ActionEvent event) {
-        setCurrentFile(null);
-        setProject((new DataRegal()).getData());
+        setCurrentFile(Optional.empty());
+        setProject(Optional.of((new DataRegal()).getData()));
     }
 
     @FXML
     protected void ex3(ActionEvent event) {
-        setCurrentFile(null);
-        setProject((new RandomData(100)).getData());
+        setCurrentFile(Optional.empty());
+        setProject(Optional.of((new RandomData(100)).getData()));
     }
 
     @FXML
     protected void save(ActionEvent event) {
-        if (currentFile == null) {
-            saveAs(event);
+        if (!project.isPresent()) {
+            return;
+        }
+        if (currentFile.isPresent()) {
+            saveProject(project.get(), currentFile.get());
         } else {
-            saveProject(project, currentFile);
+            saveAs(event);
         }
     }
 
@@ -153,26 +196,30 @@ public class MainSceneController implements Initializable {
 
     @FXML
     protected void saveAs(ActionEvent event) {
+        if (!project.isPresent()) {
+            return;
+        }
+
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(i18n("dlg.save_as.title"));
+        fileChooser.setTitle(i18n(DLG_SAVE_AS_TITLE));
         setupFileChooserExtensionFilter(fileChooser);
         File file = fileChooser.showSaveDialog(stage);
         if (file != null) {
-            saveProject(project, file);
-            setCurrentFile(file);
+            saveProject(project.get(), file);
+            setCurrentFile(Optional.of(file));
         }
     }
 
     @FXML
     protected void open(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(i18n("dlg.open.title"));
+        fileChooser.setTitle(i18n(DLG_OPEN_TITLE));
         setupFileChooserExtensionFilter(fileChooser);
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             final Project newProject = loadProject(file);
-            setProject(newProject);
-            setCurrentFile(file);
+            setProject(Optional.of(newProject));
+            setCurrentFile(Optional.of(file));
         }
 
     }
@@ -185,30 +232,39 @@ public class MainSceneController implements Initializable {
 
     @FXML
     protected void optimize(ActionEvent event) {
-        if (project == null) {
+        if (!project.isPresent()) {
             log.info("tried to optimize without project set");
             return;
         }
 
-        Task<OptimizationResult> task = new Task<OptimizationResult>() {
+        final Task<Optional<OptimizationResult>> task;
+        task = new Task<Optional<OptimizationResult>>() {
             @Override
-            protected OptimizationResult call() throws Exception {
-                updateMessage("running optimization");
+            protected Optional<OptimizationResult> call() throws Exception {
+                updateMessage(STATUS_OPTIMIZATION_IN_PROGRESS);
 
                 final Optimizer optimizer = new Optimizer();
-                final OptimizationResult result = optimizer.optimize(project, new GAOptimizationStrategy());
+                try {
+                    final OptimizationResult result = optimizer.optimize(project.get(), new GAOptimizationStrategy());
+                    updateMessage(STATUS_OPTIMIZATION_FINISHED_SUCCESS);
+                    return Optional.of(result);
 
-                Platform.runLater(() -> {
-                    renderLayout(result);
-                    project.setOptimizationResult(result);
-                });
-
-                updateMessage("done");
-                return result;
+                } catch (OptimizationFailedException ex) {
+                    log.log(Level.SEVERE, "Optimization failed", ex);
+                    updateMessage(STATUS_OPTIMIZATION_FAILED);
+                    return Optional.empty();
+                }
             }
         };
 
-        statusBarLabel.textProperty().bind(task.messageProperty());
+        task.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isPresent()) {
+                renderLayout(newValue.get());
+            }
+            project.get().setOptimizationResult(newValue);
+        });
+
+        statusBarLabel.textProperty().bind(new I18nBinding(task.messageProperty()));
         executor.submit(task);
 
     }
@@ -244,34 +300,40 @@ public class MainSceneController implements Initializable {
         this.stage = stage;
     }
 
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
+    public void setProject(@NonNull final Optional<Project> project) {
         resetCanvas();
         this.project = project;
         noProjectLoaded.set(false);
+        panelTableData.clear();
+        if (project.isPresent()) {
+            for (Panel p : project.get().getPanels()) {
+                panelTableData.add(new PanelAdapter(p.getTitle(), 1, p.getDimension().getLength(), p.getDimension().getWidth()));
+            }
+        }
     }
 
-    public File getCurrentFile() {
-        return currentFile;
-    }
-
-    public void setCurrentFile(File currentFile) {
+    public void setCurrentFile(@NonNull final Optional<File> currentFile) {
         this.currentFile = currentFile;
-        if (currentFile != null) {
-            if (stage != null) {
-                stage.setTitle(i18n("application.title") + " - " + currentFile.getName());
-            }
-            fileOpen.set(true);
-        } else {
-            if (stage != null) {
-                stage.setTitle(i18n("application.title") + " - no open file");
-            }
-            fileOpen.set(false);
+        String title = currentFile.isPresent() ? currentFile.get().getName() : i18n("application.title.no_file_open");
+        fileOpen.set(currentFile.isPresent());
+        if (stage != null) {
+            stage.setTitle(i18n("application.title") + " - " + title);
         }
     }
 
 // </editor-fold>
+    class I18nBinding extends StringBinding {
+
+        private final ReadOnlyStringProperty prop;
+
+        public I18nBinding(ReadOnlyStringProperty prop) {
+            super.bind(prop);
+            this.prop = prop;
+        }
+
+        @Override
+        protected String computeValue() {
+            return i18n(prop.get());
+        }
+    }
 }

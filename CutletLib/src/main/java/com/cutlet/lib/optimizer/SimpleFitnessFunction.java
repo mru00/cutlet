@@ -14,6 +14,6 @@ public class SimpleFitnessFunction implements FitnessFunction {
 
     @Override
     public double fitness(@NonNull OptimizationResultStats stats) {
-        return stats.getSheetArea() * stats.getTotalCutLength() / 1e5;
+        return /*stats.getBoundingBoxArea() * */ Math.sqrt(stats.getSheetArea()) * stats.getTotalCutLength() / 1e4;
     }
 }

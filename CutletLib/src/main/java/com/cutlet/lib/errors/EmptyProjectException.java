@@ -9,7 +9,7 @@ package com.cutlet.lib.errors;
  *
  * @author rmuehlba
  */
-public class EmptyProjectException extends Exception {
+public class EmptyProjectException extends OptimizationFailedException {
 
     /**
      * Creates a new instance of <code>EmptyProjectException</code> without

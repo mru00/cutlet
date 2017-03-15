@@ -4,6 +4,7 @@
 package com.cutlet.lib.optimizer;
 
 import com.cutlet.lib.errors.EmptyProjectException;
+import com.cutlet.lib.errors.OptimizationFailedException;
 import com.cutlet.lib.model.Project;
 import com.google.common.base.Stopwatch;
 import java.util.concurrent.TimeUnit;
@@ -16,9 +17,9 @@ import lombok.NonNull;
  */
 public class Optimizer {
     
-    private Logger log = Logger.getLogger("Optimizer");
+    private static final Logger log = Logger.getLogger("Optimizer");
     
-    public OptimizationResult optimize(@NonNull Project project, @NonNull OptimizationStrategy strategy) throws EmptyProjectException {
+    public OptimizationResult optimize(@NonNull Project project, @NonNull OptimizationStrategy strategy) throws OptimizationFailedException {
         
         if (project.getPanels().isEmpty()) {
             throw new EmptyProjectException("Project doesn't have any panels configured; nothing to optimize");

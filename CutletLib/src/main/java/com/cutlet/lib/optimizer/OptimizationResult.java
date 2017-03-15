@@ -1,7 +1,6 @@
 /*
  * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
-
 package com.cutlet.lib.optimizer;
 
 import com.cutlet.lib.model.Layout;
@@ -37,18 +36,21 @@ public class OptimizationResult implements Serializable {
         double totalCutLength = 0;
         double sheetArea = 0;
         double usedArea = 0;
+        double boundingBoxArea = 0;
         for (Layout layout : layouts) {
             CutTreeStats substats = layout.getCutTree().getStats();
             numberOfCuts += substats.getNumberOfCuts();
             totalCutLength += substats.getTotalCutLength();
             sheetArea += substats.getSheetArea();
             usedArea += substats.getUsedArea();
+            boundingBoxArea += substats.getBoundingBoxArea();
         }
         OptimizationResultStats stats = new OptimizationResultStats(numberOfLayouts,
                 numberOfCuts,
                 totalCutLength,
                 sheetArea,
-                usedArea);
+                usedArea,
+                boundingBoxArea);
         return stats;
     }
 
@@ -63,6 +65,5 @@ public class OptimizationResult implements Serializable {
     public void setRuntime(double runtime) {
         this.runtime = runtime;
     }
-
 
 }

@@ -18,10 +18,10 @@ import lombok.NonNull;
  */
 public class NaiiveOptimizationStrategy extends AbstractOptimizationStrategy {
 
-    private final Logger log = Logger.getLogger("NaiiveOptimzer");
+    private final static Logger log = Logger.getLogger(NaiiveOptimizationStrategy.class.getName());
 
     @Override
-    public OptimizationResult optimize(@NonNull Project project, @NonNull FitnessFunction fitness) {
+    public OptimizationResult optimize(@NonNull final Project project, @NonNull final FitnessFunction fitness) {
 
         OptimizationResult optimizationResult = new OptimizationResult();
 
@@ -29,13 +29,9 @@ public class NaiiveOptimizationStrategy extends AbstractOptimizationStrategy {
                 .sorted((b, a) -> Double.compare(a.getDimension().getLength(), b.getDimension().getLength()))
                 .collect(Collectors.toList());
 
-//        optimizationResult.createNewLayout(p);
-
         for (Panel p : panels) {
             FreeNode candidate = findSheet(optimizationResult, p);
             if (candidate == null) {
-                log.info("failed to find free space on sheet, creating a new layout");
-                
                 optimizationResult.createNewLayout(p);
                 candidate = findSheet(optimizationResult, p);
             }

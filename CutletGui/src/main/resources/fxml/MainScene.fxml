@@ -57,17 +57,19 @@
                     <items>
                         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
                             <tabs>
-                                <Tab text="Untitled Tab 1">
+                                <Tab text="%tab.panels.title">
                                     <content>
-                                        <TableView prefHeight="200.0" prefWidth="200.0">
+                                        <TableView fx:id="panelTable" editable="true" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true">
                                             <columns>
-                                                <TableColumn prefWidth="75.0" text="%EDIT_TABLE_PANEL_ID" />
-                                                <TableColumn prefWidth="75.0" text="%EDIT_TABLE_PANEL_NAME" />
+                                                <TableColumn fx:id="panelTableName" prefWidth="75.0" text="%table.panel.name" />
+                                                <TableColumn fx:id="panelTableCount" prefWidth="75.0" text="%table.panel.count" />
+                                    <TableColumn fx:id="panelTableLength" prefWidth="75.0" style="-fx-text-alignment: right;" text="%table.panel.length" />
+                                    <TableColumn fx:id="panelTableWidth" prefWidth="75.0" text="%table.panel.width" />
                                             </columns>
                                         </TableView>
                                     </content>
                                 </Tab>
-                                <Tab text="Untitled Tab 2">
+                                <Tab text="%tab.sheets.title">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                                     </content>
