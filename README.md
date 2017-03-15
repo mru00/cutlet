@@ -3,10 +3,10 @@
 cutlet - Panel Cut Optimization [![Build Status](https://travis-ci.org/mru00/cutlet.svg?branch=master)](https://travis-ci.org/mru00/cutlet)
 
 
-** not production ready **
+**not production ready**
 
 
-cutlet is my approach on guillotine panel cut optimization, primarily concerned with cutting panels from stock sheets of wood.
+cutlet is my naiive approach on guillotine panel cut optimization, primarily concerned with cutting panels from stock sheets of wood.
 
 
 There are many [commercial solutions](#commercial-products) available, and quite some [Open Source implementations](#open-source-implementations).
@@ -14,6 +14,11 @@ There are many [commercial solutions](#commercial-products) available, and quite
 This project is implemented in Java 1.8, using Maven. Gui is in JavaFX/FXML.
 
 ![image](https://cloud.githubusercontent.com/assets/581904/23873417/3dcddb1e-0832-11e7-8f96-502afaa06bf2.png)
+
+
+If you want to contribute - please do so, any help would be appreciated.
+
+If you want to use this project - please do so, I would be happy to hear how it is working for you, and what features are missing.
 
 ## Overview
 
@@ -23,7 +28,9 @@ There are 3 projects:
 * Gui
 * Benchmark
 
-The library implements the data structures and algorithms. Gui will become... well... the GUI. Benchmark run examples and compares them.
+The library implements the data structures and algorithms. 
+Gui will become... well... the GUI. 
+Benchmark runs examples and compares them.
 
 A goal was to implement a solid data structure to provide a good framework for research / surveys.
 
@@ -63,6 +70,7 @@ This project is in it's very early stages, so don't expect too much.
 - [x] layout in FXML / SceneBuilder
 - [ ] panning & zooming
 - [ ] parts editor / table
+- [ ] stock keeping
 - [ ] settings/configuration 
 
 ### Benchmark
@@ -101,6 +109,16 @@ You can have a look at [![Build Status](https://travis-ci.org/mru00/cutlet.svg?b
 - [x] find deluxe genetic algorithm framework
 
 
+## Dependencies
+
+Project | type | description
+--------|------|------------
+http://jenetics.io/ | maven | genetic algorithm
+https://github.com/google/guava | maven | general java stuff
+https://pathfinder.readme.io/blog/simmulated-annealing | maven | simulated annealing algorithm
+http://cs.gettysburg.edu/~tneller/resources/sls/index.html | source | another sim. ann.
+
+
 ## Related Work
 
 https://github.com/Jack000/SVGnest
@@ -108,7 +126,6 @@ https://github.com/Jack000/SVGnest
 Simulated Annealing taken from http://cs.gettysburg.edu/~tneller/resources/sls/index.html
 
 
-http://jenetics.io/
 
 
 ### Open source implementations
