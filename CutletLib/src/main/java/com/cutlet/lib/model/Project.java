@@ -11,6 +11,7 @@ import java.util.List;
 // we use guava's Optional here, because it is serializable, jdks is not
 // http://stackoverflow.com/a/39637752/1689451
 import com.google.common.base.Optional;
+import static com.google.common.base.Preconditions.checkArgument;
 
 import lombok.NonNull;
 
@@ -37,10 +38,7 @@ public class Project implements Serializable {
     }
 
     public void setBladeWidth(final double bladeWidth) {
-        if (bladeWidth < 0) {
-            throw new IllegalArgumentException("bladeWidth can't be negative");
-        }
-
+        checkArgument(bladeWidth >= 0, "bladeWidth can't be negative");
         this.bladeWidth = bladeWidth;
     }
 
@@ -62,4 +60,13 @@ public class Project implements Serializable {
         }
     }
 
+    public List<PanelInstance> getPanelInstances() {
+        List<PanelInstance> pis = new ArrayList<>();
+        for (Panel p : panels) {
+            for (int i = 0; i < p.getCount(); i++) {
+                pis.add(new PanelInstance(p.getSheet(), p.getDimension(), p.getTitle(), i, p.canRotate()));
+            }
+        }
+        return pis;
+    }
 }

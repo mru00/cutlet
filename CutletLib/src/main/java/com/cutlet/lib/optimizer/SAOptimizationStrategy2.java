@@ -3,7 +3,7 @@
  */
 package com.cutlet.lib.optimizer;
 
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.data.cuttree.FreeNode;
 import com.cutlet.lib.errors.OptimizationFailedException;
@@ -45,11 +45,11 @@ public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
         }
     }
 
-    public OptimizationResult optimizeAux(@NonNull Project project, @NonNull List<Panel> panels) {
+    public OptimizationResult optimizeAux(@NonNull Project project, @NonNull List<PanelInstance> panels) {
 
         OptimizationResult optimizationResult = new OptimizationResult();
 
-        for (Panel p : panels) {
+        for (PanelInstance p : panels) {
             FreeNode candidate = findSheet(optimizationResult, p);
             if (candidate == null) {
                 optimizationResult.createNewLayout(p);
@@ -82,7 +82,7 @@ public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
         @Override
         public OptState initialState() throws InfeasibleProblemException {
             OptState initial = new OptState();
-            initial.panels = project.getPanels();
+            initial.panels = project.getPanelInstances();
             return initial;
         }
     }
@@ -90,7 +90,7 @@ public class SAOptimizationStrategy2 extends AbstractOptimizationStrategy {
     class OptState implements SearchState<OptState> {
 
         OptimizationResult result = null;
-        List<Panel> panels;
+        List<PanelInstance> panels;
 
         @Override
         public OptState step() {

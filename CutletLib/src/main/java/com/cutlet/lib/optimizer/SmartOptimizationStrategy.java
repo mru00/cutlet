@@ -4,7 +4,7 @@
 
 package com.cutlet.lib.optimizer;
 
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.data.cuttree.FreeNode;
 import com.cutlet.lib.data.cuttree.PanelNode;
@@ -26,7 +26,7 @@ public class SmartOptimizationStrategy extends AbstractOptimizationStrategy {
     @Override
     public OptimizationResult optimize(@NonNull Project project, @NonNull FitnessFunction fitness) {
 
-        List<Panel> panels = project.getPanels().stream()
+        List<PanelInstance> panels = project.getPanelInstances().stream()
                 .sorted((b, a) -> Double.compare(a.getDimension().getArea(), b.getDimension().getArea()))
                 .collect(Collectors.toList());
 
@@ -36,18 +36,18 @@ public class SmartOptimizationStrategy extends AbstractOptimizationStrategy {
             return optimizationResult;
         }
 
-        Deque<Panel> unassignedPanels = new LinkedList<>();
+        Deque<PanelInstance> unassignedPanels = new LinkedList<>();
 
-        for (Panel p : panels) {
+        for (PanelInstance p : panels) {
             unassignedPanels.add(p);
         }
 
-        final Panel firstPanel = unassignedPanels.peekFirst();
+        final PanelInstance firstPanel = unassignedPanels.peekFirst();
 
         optimizationResult.createNewLayout(firstPanel);
 
         while (!unassignedPanels.isEmpty()) {
-            Panel panel = unassignedPanels.removeFirst();
+            PanelInstance panel = unassignedPanels.removeFirst();
 
             List<FreeNode> candidates = getFreeNodes(optimizationResult).stream()
                     .filter(t -> t.canHold(panel))

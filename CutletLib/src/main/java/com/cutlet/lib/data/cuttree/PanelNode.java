@@ -4,7 +4,7 @@
 package com.cutlet.lib.data.cuttree;
 
 import com.cutlet.lib.model.Dimension;
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Position;
 import lombok.NonNull;
 import lombok.ToString;
@@ -16,10 +16,10 @@ import lombok.ToString;
 @ToString
 public class PanelNode extends AbstractCutTreeNode {
 
-    private final Panel panel;
+    private final PanelInstance panel;
 
     public PanelNode(@NonNull final CutTreeNode parent,
-            @NonNull final Panel panel,
+            @NonNull final PanelInstance panel,
             @NonNull final Position position,
             @NonNull final Dimension dimension) {
 
@@ -27,7 +27,7 @@ public class PanelNode extends AbstractCutTreeNode {
         this.panel = panel;
     }
 
-    public Panel getPanel() {
+    public PanelInstance getPanel() {
         return panel;
     }
 

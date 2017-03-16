@@ -3,7 +3,7 @@
  */
 package com.cutlet.lib.optimizer;
 
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.data.cuttree.FreeNode;
 import com.cutlet.lib.errors.OptimizationFailedException;
@@ -30,7 +30,7 @@ public class PermutationOptimizationStrategy extends AbstractOptimizationStrateg
         if (project.getPanels().size() > 10) {
             throw new OptimizationFailedException("Permutation calculation for n > 10");
         }
-        Permutations<Panel> perm = new Permutations<>(project.getPanels().toArray(new Panel[]{}));
+        Permutations<PanelInstance> perm = new Permutations<>(project.getPanels().toArray(new PanelInstance[]{}));
 
         OptimizationResult bestResult = null;
         double bestFitness = Double.MAX_VALUE;
@@ -52,12 +52,12 @@ public class PermutationOptimizationStrategy extends AbstractOptimizationStrateg
         return bestResult;
     }
 
-    public OptimizationResult optimizeAux(Project project, List<Panel> panels) {
+    public OptimizationResult optimizeAux(Project project, List<PanelInstance> panels) {
 
         OptimizationResult optimizationResult = new OptimizationResult();
 
 //        optimizationResult.createNewLayout(p);
-        for (Panel p : panels) {
+        for (PanelInstance p : panels) {
             FreeNode candidate = findSheet(optimizationResult, p);
             if (candidate == null) {
                 log.info("failed to find free space on sheet, creating a new layout");

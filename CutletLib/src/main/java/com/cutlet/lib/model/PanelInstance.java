@@ -12,29 +12,29 @@ import lombok.ToString;
  * @author rmuehlba
  */
 @ToString(exclude = "sheet")
-public class Panel implements Serializable {
+public class PanelInstance implements Serializable {
 
     private final String title;
     private final StockSheet sheet;
     private final Dimension dimension;
     private final boolean canRotate;
-    private final int count;
+    private final int instanceId;
 
     public String getTitle() {
         return title;
     }
 
-    public Panel(@NonNull final StockSheet sheet,
+    public PanelInstance(@NonNull final StockSheet sheet,
             @NonNull final Dimension dimension,
             @NonNull final String title,
-            final boolean canRotate,
-            final int count) {
+            final int instanceId,
+            final boolean canRotate) {
 
         this.sheet = sheet;
         this.title = title;
         this.dimension = dimension;
         this.canRotate = canRotate;
-        this.count = count;
+        this.instanceId = instanceId;
 
         if (dimension.getWidth() > sheet.getDimension().getWidth() || dimension.getLength() > sheet.getDimension().getLength()) {
             throw new RuntimeException("panel too large for sheet");
@@ -49,16 +49,7 @@ public class Panel implements Serializable {
         return dimension;
     }
 
-    public boolean canRotate() {
-        return canRotate;
+    public int getInstanceId() {
+        return instanceId;
     }
-
-    public boolean isCanRotate() {
-        return canRotate;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
 }

@@ -4,7 +4,7 @@
 
 package com.cutlet.lib.optimizer;
 
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.data.cuttree.FreeNode;
 import java.util.List;
@@ -25,11 +25,11 @@ public class NaiiveOptimizationStrategy extends AbstractOptimizationStrategy {
 
         OptimizationResult optimizationResult = new OptimizationResult();
 
-        List<Panel> panels = project.getPanels().stream()
+        List<PanelInstance> panels = project.getPanelInstances().stream()
                 .sorted((b, a) -> Double.compare(a.getDimension().getLength(), b.getDimension().getLength()))
                 .collect(Collectors.toList());
 
-        for (Panel p : panels) {
+        for (PanelInstance p : panels) {
             FreeNode candidate = findSheet(optimizationResult, p);
             if (candidate == null) {
                 optimizationResult.createNewLayout(p);

@@ -5,7 +5,7 @@
 package com.cutlet.lib.data.cuttree;
 
 import com.cutlet.lib.model.Dimension;
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Position;
 import java.io.Serializable;
 import lombok.NonNull;
@@ -30,7 +30,7 @@ public abstract class AbstractCutTreeNode implements CutTreeNode, Serializable {
         this.parent = parent;
     }
 
-    public boolean canHold(@NonNull final Panel p) {
+    public boolean canHold(@NonNull final PanelInstance p) {
         return getDimension().canHold(p.getDimension());
     }
 

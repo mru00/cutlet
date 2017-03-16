@@ -5,10 +5,10 @@
 package com.cutlet.lib.testing;
 
 import com.cutlet.lib.model.Dimension;
-import com.cutlet.lib.model.Panel;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.model.StockSheet;
 import com.cutlet.lib.material.Wood;
+import com.cutlet.lib.model.Panel;
 import java.util.List;
 import lombok.NonNull;
 

@@ -6,6 +6,7 @@ package com.cutlet.lib.testing;
 
 import com.cutlet.lib.model.Dimension;
 import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.model.StockSheet;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class RandomData extends AbstractTestData {
         for (int i = 0; i < panelCount; i++) {
             double x = rng.nextInt(300);
             double y = rng.nextInt(300);
-            inputs.add(new Panel(sheet, new Dimension(x, y), "p" + i, canRotate));
+            inputs.add(new Panel(sheet, new Dimension(x, y), "p" + i, canRotate, 1));
         }
         return makeProject(inputs, 1);
     }

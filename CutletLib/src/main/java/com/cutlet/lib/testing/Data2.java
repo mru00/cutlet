@@ -5,6 +5,7 @@ package com.cutlet.lib.testing;
 
 import com.cutlet.lib.model.Dimension;
 import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.model.StockSheet;
 import java.util.ArrayList;
@@ -24,13 +25,13 @@ public class Data2 extends AbstractTestData {
         final boolean canRotate = false;
 
         List<Panel> inputs = new ArrayList<>();
-        inputs.add(new Panel(sheet, new Dimension(100, 100), "p1", canRotate));
-        inputs.add(new Panel(sheet, new Dimension(200, 250), "p2", canRotate));
-        inputs.add(new Panel(sheet, new Dimension(200, 250), "p3", canRotate));
-        inputs.add(new Panel(sheet, new Dimension(300, 250), "p4", canRotate));
-        inputs.add(new Panel(sheet, new Dimension(50, 250), "p4", canRotate));
-        inputs.add(new Panel(sheet, new Dimension(15, 13), "p5", canRotate));
-        inputs.add(new Panel(sheet, new Dimension(15, 13), "p6", canRotate));
+        inputs.add(new Panel(sheet, new Dimension(100, 100), "p1", canRotate, 1));
+        inputs.add(new Panel(sheet, new Dimension(200, 250), "p2", canRotate, 1));
+        inputs.add(new Panel(sheet, new Dimension(200, 250), "p3", canRotate, 1));
+        inputs.add(new Panel(sheet, new Dimension(300, 250), "p4", canRotate, 1));
+        inputs.add(new Panel(sheet, new Dimension(50, 250), "p4", canRotate, 1));
+        inputs.add(new Panel(sheet, new Dimension(15, 13), "p5", canRotate, 1));
+        inputs.add(new Panel(sheet, new Dimension(15, 13), "p6", canRotate, 1));
 
         return makeProject(inputs, 1);
     }

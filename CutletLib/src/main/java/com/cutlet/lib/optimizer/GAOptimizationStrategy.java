@@ -3,7 +3,7 @@
  */
 package com.cutlet.lib.optimizer;
 
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.data.cuttree.FreeNode;
 import java.util.List;
@@ -30,17 +30,17 @@ public class GAOptimizationStrategy extends AbstractOptimizationStrategy {
     public OptimizationResult optimize(@NonNull final Project project, 
             @NonNull final FitnessFunction fitness) {
 
-        final ISeq<Panel> panels = ISeq.of(project.getPanels());
-        final Codec<ISeq<Panel>, EnumGene<Panel>> codec = codecs.ofPermutation(panels);
+        final ISeq<PanelInstance> panels = ISeq.of(project.getPanelInstances());
+        final Codec<ISeq<PanelInstance>, EnumGene<PanelInstance>> codec = codecs.ofPermutation(panels);
 
-        final Engine<EnumGene<Panel>, Double> engine
+        final Engine<EnumGene<PanelInstance>, Double> engine
                 = Engine.builder((seq) -> fitness.fitness(optimizeAux(project, seq.asList()).getStats()), codec)
                         .optimize(Optimize.MINIMUM)
                         .build();
 
         // 4.) Start the execution (evolution) and
         //     collect the result.
-        ISeq<Panel> result = codec.decode(
+        ISeq<PanelInstance> result = codec.decode(
                 engine.stream()
                         .limit(100)
                         .collect(EvolutionResult.toBestGenotype()));
@@ -48,11 +48,11 @@ public class GAOptimizationStrategy extends AbstractOptimizationStrategy {
         return optimizeAux(project, result.asList());
     }
 
-    public OptimizationResult optimizeAux(@NonNull final Project project, @NonNull final List<Panel> panels) {
+    public OptimizationResult optimizeAux(@NonNull final Project project, @NonNull final List<PanelInstance> panels) {
 
         final OptimizationResult optimizationResult = new OptimizationResult();
 
-        for (Panel p : panels) {
+        for (PanelInstance p : panels) {
             FreeNode candidate = findSheet(optimizationResult, p);
             if (candidate == null) {
                 optimizationResult.createNewLayout(p);

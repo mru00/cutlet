@@ -1,11 +1,8 @@
 /*
  * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
-
-
 package com.cutlet.benchmark;
 
-import com.cutlet.lib.errors.EmptyProjectException;
 import com.cutlet.lib.errors.OptimizationFailedException;
 import com.cutlet.lib.testing.RandomData;
 import com.cutlet.lib.testing.Data1;
@@ -51,7 +48,7 @@ public class OptimizerBenchmark {
 
     public static void main(String... args) {
 
-        setDebugLevel(Level.OFF);
+        setDebugLevel(Level.SEVERE);
 
         System.err.println("benchtmark");
 
@@ -93,12 +90,12 @@ public class OptimizerBenchmark {
                     final Project project = b.getData();
                     saveProject(project);
                     final OptimizationResult result = optimizer.optimize(project, strategy);
-                    
+
                     final int nPanelsAct = sumNumberOfPanels(result);
                     final int nPanelsExp = project.getPanels().size();
-                    
+
                     OptimizationResultStats stats = result.getStats();
-                    
+
                     output.println(String.format("%-10s %-13s %10d %10d %10.1f %10d %10.0f %10.1f %10.0f",
                             opt,
                             b.getTitle(),
@@ -109,11 +106,10 @@ public class OptimizerBenchmark {
                             stats.getTotalCutLength(),
                             (new SimpleFitnessFunction()).fitness(stats),
                             result.getRuntime()));
-                    
-                    assert (nPanelsAct == nPanelsExp);
-                    
-                    //ConsoleOutput.dumpResult(result);
 
+                    assert (nPanelsAct == nPanelsExp);
+
+                    //ConsoleOutput.dumpResult(result);
                 } catch (OptimizationFailedException ex) {
                     Logger.getLogger(OptimizerBenchmark.class.getName()).log(Level.SEVERE, null, ex);
                     output.println(String.format("%-10s %-13s failed: %s",

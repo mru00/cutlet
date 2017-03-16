@@ -4,7 +4,7 @@
 package com.cutlet.gui;
 
 import com.cutlet.lib.model.Dimension;
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Position;
 import com.cutlet.lib.data.cuttree.CutNode;
 import com.cutlet.lib.data.cuttree.CutTreeNode;
@@ -136,15 +136,16 @@ public class CutLayoutDrawer {
                  */
             } else if (node instanceof PanelNode) {
                 final PanelNode panelNode = (PanelNode) node;
-                final Panel panel = panelNode.getPanel();
+                final PanelInstance panel = panelNode.getPanel();
 
                 final Position pos = scale(panelNode.getPosition());
 
                 gc.save();
                 gc.setGlobalAlpha(1);
                 gc.setFill(Color.BLACK);
-                gc.fillText(String.format("%s (%.1f x %.1f)",
+                gc.fillText(String.format("%s [%d] (%.1f x %.1f)",
                         panel.getTitle(),
+                        panel.getInstanceId(),
                         panel.getDimension().getLength(),
                         panel.getDimension().getWidth()),
                         pos.getX() + 10,

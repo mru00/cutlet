@@ -4,7 +4,7 @@
 package com.cutlet.lib.optimizer;
 
 import com.cutlet.lib.model.Layout;
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.data.cuttree.CutTreeStats;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class OptimizationResult implements Serializable {
     private final List<Layout> layouts = new ArrayList<>();
     private double runtime;
 
-    public void createNewLayout(@NonNull Panel p) {
+    public void createNewLayout(@NonNull PanelInstance p) {
         addLayout(new Layout(p.getSheet(), layouts.size()));
     }
 

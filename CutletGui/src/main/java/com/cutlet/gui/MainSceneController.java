@@ -5,6 +5,7 @@ package com.cutlet.gui;
 
 import com.cutlet.lib.errors.OptimizationFailedException;
 import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.optimizer.GAOptimizationStrategy;
 import com.cutlet.lib.optimizer.OptimizationResult;
@@ -102,9 +103,9 @@ public class MainSceneController implements Initializable {
         assert (panelTable != null);
 
         panelTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        panelTableCount.setCellValueFactory(new PropertyValueFactory<PanelAdapter, Integer>("count"));
-        panelTableLength.setCellValueFactory(new PropertyValueFactory<PanelAdapter, Double>("length"));
-        panelTableWidth.setCellValueFactory(new PropertyValueFactory<PanelAdapter, Double>("width"));
+        panelTableCount.setCellValueFactory(new PropertyValueFactory<>("count"));
+        panelTableLength.setCellValueFactory(new PropertyValueFactory<>("length"));
+        panelTableWidth.setCellValueFactory(new PropertyValueFactory<>("width"));
 
         panelTable.setItems(panelTableData);
     }
@@ -307,7 +308,7 @@ public class MainSceneController implements Initializable {
         panelTableData.clear();
         if (project.isPresent()) {
             for (Panel p : project.get().getPanels()) {
-                panelTableData.add(new PanelAdapter(p.getTitle(), 1, p.getDimension().getLength(), p.getDimension().getWidth()));
+                panelTableData.add(new PanelAdapter(p.getTitle(), p.getCount(), p.getDimension().getLength(), p.getDimension().getWidth()));
             }
         }
     }

@@ -5,7 +5,7 @@
 package com.cutlet.lib.data.cuttree;
 
 import com.cutlet.lib.model.Dimension;
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Position;
 import lombok.NonNull;
 
@@ -36,7 +36,7 @@ public class FreeNode extends AbstractCutTreeNode {
         return cut;
     }
 
-    public PanelNode setPanel(@NonNull Panel panel) {
+    public PanelNode setPanel(@NonNull PanelInstance panel) {
         final CutTreeNode parent = this.getParent();
         final PanelNode pn = new PanelNode(parent, panel, getPosition(), getDimension());
         parent.replaceChild(this, pn);

@@ -5,7 +5,7 @@ package com.cutlet.lib.optimizer;
 
 import com.cutlet.lib.model.Layout;
 import com.cutlet.lib.model.Dimension;
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.data.cuttree.CutNode;
 import com.cutlet.lib.data.cuttree.CutTreeNode;
@@ -21,7 +21,7 @@ import lombok.NonNull;
 public abstract class AbstractOptimizationStrategy implements OptimizationStrategy {
 
     protected FreeNode findSheet(@NonNull final OptimizationResult result,
-            @NonNull final Panel p) {
+            @NonNull final PanelInstance p) {
 
         return getFreeNodes(result).stream()
                 .filter(a -> a.canHold(p))
@@ -43,7 +43,7 @@ public abstract class AbstractOptimizationStrategy implements OptimizationStrate
 
     protected FreeNode cutToFit(@NonNull FreeNode candidate,
             @NonNull final Project project,
-            @NonNull final Panel p) {
+            @NonNull final PanelInstance p) {
 
         final Dimension panelDimension = p.getDimension();
         if (candidate.getDimension().getLength() != panelDimension.getLength()) {

@@ -1,11 +1,10 @@
 /*
  * Copyright (C) 2017 rudolf.muehlbauer@gmail.com
  */
-
 package com.cutlet.lib.optimizer;
 
 // uses http://cs.gettysburg.edu/~tneller/resources/sls/index.html
-import com.cutlet.lib.model.Panel;
+import com.cutlet.lib.model.PanelInstance;
 import com.cutlet.lib.model.Project;
 import com.cutlet.lib.data.cuttree.FreeNode;
 import com.cutlet.lib.tneller.SimulatedAnnealer;
@@ -32,12 +31,7 @@ public class SAOptimizationStrategy extends AbstractOptimizationStrategy {
         // Uncomment the desired problem below:
         OptState state = new OptState(project, fitness);
         //State state = new BinPackingProblem();
-
-        state.perm = new int[project.getPanels().size()];
-        for (int i = 0; i < project.getPanels().size(); i++) {
-            state.perm[i] = i;
-        }
-        state.prevPerm = state.perm;
+        state.panels = project.getPanelInstances();
 
         // Uncomment the desired stochastic local search below:
         //OptState minState = (OptState) new HillDescender(state).search(ITERATIONS);
@@ -46,11 +40,11 @@ public class SAOptimizationStrategy extends AbstractOptimizationStrategy {
         return minState.result;
     }
 
-    public OptimizationResult optimizeAux(@NonNull Project project, @NonNull List<Panel> panels) {
+    public OptimizationResult optimizeAux(@NonNull Project project, @NonNull List<PanelInstance> panels) {
 
         OptimizationResult optimizationResult = new OptimizationResult();
 
-        for (Panel p : panels) {
+        for (PanelInstance p : panels) {
             FreeNode candidate = findSheet(optimizationResult, p);
             if (candidate == null) {
                 optimizationResult.createNewLayout(p);
@@ -68,51 +62,45 @@ public class SAOptimizationStrategy extends AbstractOptimizationStrategy {
 
         Project project;
         FitnessFunction fitness;
-        int[] perm;
-        int[] prevPerm;
+        List<PanelInstance> panels, panelsPrev;
         OptimizationResult result;
 
         public OptState(@NonNull Project project, @NonNull FitnessFunction fitness) {
             this.project = project;
             this.fitness = fitness;
+            this.panelsPrev = this.panels;
         }
 
         @Override
         public void step() {
-            prevPerm = perm.clone();
-            final int posA = random.nextInt(perm.length);
-            int posB = random.nextInt(perm.length);
+
+            panelsPrev = new ArrayList<>(panels);
+
+            final int posA = random.nextInt(panels.size());
+            int posB = random.nextInt(panels.size());
             while (posA == posB) {
-                posB = random.nextInt(perm.length);
+                posB = random.nextInt(panels.size());
             }
-            final int tmp = perm[posA];
-            perm[posA] = perm[posB];
-            perm[posB] = tmp;
+
+            panels.set(posA, panelsPrev.get(posB));
+            panels.set(posB, panelsPrev.get(posA));
         }
 
         @Override
         public void undo() {
-            perm = prevPerm;
+            panels = panelsPrev;
         }
 
         @Override
         public double energy() {
-            result = optimizeAux(project, lookup(project.getPanels(), perm));
+            result = optimizeAux(project, panels);
             return fitness.fitness(result.getStats());
-        }
-
-        List<Panel> lookup(@NonNull List<Panel> input, int[] lookup) {
-            List<Panel> newArr = new ArrayList<>();
-            for (int i : lookup) {
-                newArr.add(input.get(i));
-            }
-            return newArr;
         }
 
         public Object clone() {
             OptState copy = new OptState(project, fitness);
-            copy.perm = perm;
-            copy.prevPerm = prevPerm;
+            copy.panels = new ArrayList<>(panels);
+            copy.panelsPrev = new ArrayList<>(panelsPrev);
             copy.result = result;
             return copy;
         }
