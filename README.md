@@ -161,6 +161,12 @@ https://github.com/Jack000/SVGnest
 
 Simulated Annealing taken from http://cs.gettysburg.edu/~tneller/resources/sls/index.html
 
+- http://stackoverflow.com/questions/4360637/cut-optimisation-algorithm
+- http://stackoverflow.com/questions/23922557/algorithm-for-pipe-cutting-optimization?rq=1
+- https://en.wikipedia.org/wiki/Cutting_stock_problem
+- https://en.wikipedia.org/wiki/Guillotine_problem
+- http://www.amzi.com/articles/papercutter.htm
+
 
 
 
