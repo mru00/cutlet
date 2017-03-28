@@ -64,7 +64,7 @@ This project is in it's very early stages, so don't expect too much.
 
 
 - [x] visalize layout
-- [x] run optimization in worker 
+- [x] run optimization in worker thread
 - [x] i18n prepared
 - [x] save & load (via java serialization)
 - [x] layout in FXML / SceneBuilder
