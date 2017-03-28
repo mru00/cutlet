@@ -68,7 +68,8 @@ This project is in it's very early stages, so don't expect too much.
 - [x] i18n prepared
 - [x] save & load (via java serialization)
 - [x] layout in FXML / SceneBuilder
-- [ ] panning & zooming
+- [x] panning
+- [ ] zooming
 - [ ] parts editor / table
 - [ ] stock keeping
 - [ ] settings/configuration 
