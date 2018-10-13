@@ -100,7 +100,9 @@ public class SAOptimizationStrategy extends AbstractOptimizationStrategy {
         public Object clone() {
             OptState copy = new OptState(project, fitness);
             copy.panels = new ArrayList<>(panels);
-            copy.panelsPrev = new ArrayList<>(panelsPrev);
+            if (panelsPrev != null ) {
+                copy.panelsPrev = new ArrayList<>(panelsPrev);
+            }
             copy.result = result;
             return copy;
         }

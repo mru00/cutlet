@@ -92,26 +92,33 @@ public class OptimizerBenchmark {
                     final OptimizationResult result = optimizer.optimize(project, strategy);
 
                     final int nPanelsAct = sumNumberOfPanels(result);
-                    final int nPanelsExp = project.getPanels().size();
+                    final int nPanelsExp = project.getPanels().stream().mapToInt(p-> p.getCount()).sum();
 
                     OptimizationResultStats stats = result.getStats();
 
-                    output.println(String.format("%-10s %-13s %10d %10d %10.1f %10d %10.0f %10.1f %10.0f",
-                            opt,
-                            b.getTitle(),
-                            nPanelsExp,
-                            stats.getNumberOfLayouts(),
-                            stats.getWastagePercent(),
-                            stats.getNumberOfCuts(),
-                            stats.getTotalCutLength(),
-                            (new SimpleFitnessFunction()).fitness(stats),
-                            result.getRuntime()));
+                    if (nPanelsAct != nPanelsExp) {
+                        throw new OptimizationFailedException(String.format(
+                                    "number of panelsActual[%d] != number of panelsExpected[%d] in %s[%s]", 
+                                    nPanelsAct, 
+                                    nPanelsExp, 
+                                    b.getTitle(), 
+                                    opt));
+                    }
 
-                    assert (nPanelsAct == nPanelsExp);
+                    output.println(String.format("%-10s %-13s %10d %10d %10.1f %10d %10.0f %10.1f %10.0f",
+                                opt,
+                                b.getTitle(),
+                                nPanelsExp,
+                                stats.getNumberOfLayouts(),
+                                stats.getWastagePercent(),
+                                stats.getNumberOfCuts(),
+                                stats.getTotalCutLength(),
+                                (new SimpleFitnessFunction()).fitness(stats),
+                                result.getRuntime()));
 
                     //ConsoleOutput.dumpResult(result);
                 } catch (OptimizationFailedException ex) {
-                    Logger.getLogger(OptimizerBenchmark.class.getName()).log(Level.SEVERE, null, ex);
+                    //Logger.getLogger(OptimizerBenchmark.class.getName()).log(Level.SEVERE, null, ex);
                     output.println(String.format("%-10s %-13s failed: %s",
                             opt,
                             b.getTitle(),

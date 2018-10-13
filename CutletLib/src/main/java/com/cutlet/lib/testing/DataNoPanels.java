@@ -26,7 +26,7 @@ public class DataNoPanels extends AbstractTestData {
 
     @Override
     public String getTitle() {
-        return "Data1";
+        return "NoPanels";
     }
 
 }

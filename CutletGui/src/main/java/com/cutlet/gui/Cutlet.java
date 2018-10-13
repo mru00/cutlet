@@ -81,7 +81,7 @@ public class Cutlet extends Application {
     }
 
     private static ResourceBundle getBundle() {
-        return ResourceBundle.getBundle("Bundle", Locale.GERMANY);
+        return ResourceBundle.getBundle("Bundle", Locale.US);
     }
 
 }

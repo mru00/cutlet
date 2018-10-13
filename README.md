@@ -155,6 +155,15 @@ https://github.com/google/guava | maven | general java stuff
 https://pathfinder.readme.io/blog/simmulated-annealing | maven | simulated annealing algorithm
 http://cs.gettysburg.edu/~tneller/resources/sls/index.html | source | another sim. ann.
 
+## Compile & run
+
+This project uses [Maven](https://maven.apache.org/) to manage library dependencies, build & run.
+
+This means: install maven and execute:
+
+ mvn test
+
+The code does not compile on openjdk, the dependency lombok does not work. So the ubuntu users out there should install the oracle jdk.
 
 ## Related Work
 
