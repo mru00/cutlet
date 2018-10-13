@@ -13,7 +13,7 @@ There are many [commercial solutions](#commercial-products) available, and quite
 
 This project is implemented in Java 1.8, using Maven. Gui is in JavaFX/FXML.
 
-![image](https://cloud.githubusercontent.com/assets/581904/23991289/0bb93818-0a39-11e7-9533-50c75cacdcda.png)
+![image](https://user-images.githubusercontent.com/581904/46910471-1cf03f00-cf45-11e8-95e0-7b8de67c140a.png)
 
 If you want to contribute - please do so, any help would be appreciated.
 

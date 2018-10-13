@@ -6,7 +6,12 @@ package com.cutlet.gui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.util.Properties;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Handler;
@@ -26,14 +31,13 @@ public class Cutlet extends Application {
     public void start(Stage primaryStage) {
 
         try {
-
             final FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainScene.fxml"), getBundle());
             final Parent root = loader.load();
 
             MainSceneController controller = (MainSceneController) loader.getController();
             controller.setStage(primaryStage);
 
-            final Scene scene = new Scene(root, 300, 275);
+            final Scene scene = new Scene(root);
             scene.getStylesheets().add("/styles/Styles.css");
 
             primaryStage.setTitle(i18n("application.title"));
@@ -70,6 +74,25 @@ public class Cutlet extends Application {
         }
     }
 
+    /*
+     * not ready yet
+    public static Properties loadUserProperties() {
+        Properties p = new Properties();
+        try {
+            InputStream in = Cutlet.class.getResourceAsStream("Bundle");
+            p.load(in);
+
+            String homedir = System.getProperty("user.home");
+            String externalFileName = System.getProperty(homedir + "/.cutlet.properties");
+            InputStream fin = new FileInputStream(new File(externalFileName));
+            p.load(fin);
+        }
+        catch (FileNotFoundException e) {}
+        catch (IOException e) {}
+        return p;
+    }
+    */
+
     private static String i18n(String str) {
         final ResourceBundle bundle = getBundle();
 
@@ -81,6 +104,7 @@ public class Cutlet extends Application {
     }
 
     private static ResourceBundle getBundle() {
+        // select UI language. currently only US + GERMAN are available
         return ResourceBundle.getBundle("Bundle", Locale.US);
     }
 
